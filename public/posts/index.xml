@@ -2,18 +2,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Bill Marcy</title>
-    <link>http://localhost:1313/posts/</link>
+    <link>https://example.org/posts/</link>
     <description>Recent content in Posts on Bill Marcy</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 18 Mar 2025 12:55:36 -0700</lastBuildDate>
-    <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Playtree Technical Overview</title>
-      <link>http://localhost:1313/posts/playtree-technical-overview/</link>
-      <pubDate>Tue, 18 Mar 2025 12:55:36 -0700</pubDate>
-      <guid>http://localhost:1313/posts/playtree-technical-overview/</guid>
-      <description>&lt;p&gt;Playtree lets users create and manage personalized music playlists that branch and loop playback. In this post, I&amp;rsquo;ll explore the technical challenges and solutions I encountered while building Playtree.&lt;/p&gt;&#xA;&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;&#xA;&lt;p&gt;Playtree is designed to provide a novel way to interact with music. Instead of traditional linear playlists, Playtree uses a graph structure where users create &lt;em&gt;playnodes&lt;/em&gt; representing musical elements, and &lt;em&gt;playedges&lt;/em&gt; to define the flow of playback. Multiple playheads can be maintained simultaneously within the same playtree.&lt;/p&gt;</description>
-    </item>
+    <lastBuildDate></lastBuildDate>
+    <atom:link href="https://example.org/posts/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>
