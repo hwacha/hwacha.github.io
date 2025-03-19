@@ -1,0 +1,216 @@
+// params
+$faceSize: 30px;
+// derived
+$halfFaceSize: $faceSize / 2;
+$octagonInradius: calc((1 + sqrt(2)) * $halfFaceSize);
+$triangleYCorrection: 0.2113 * $faceSize;
+$triangleAngle: calc(acos(sqrt(6)/3));
+$triangleCenterRadius: calc((((3*sqrt(3)) + sqrt(6))/6) * $faceSize);
+$triangleHeight: calc(sqrt(3)*50%);
+
+// colors
+// red
+$systemGreen: #00ff00;
+// blue
+// yellow
+// cyan
+// magenta
+$systemOrange: #FF8000;
+$chartreuse: #80FF00;
+$springGreen: #00FF80;
+$azure: #0080FF;
+$violet: #8000FF;
+$rose: #FF0080;
+
+.viewport {
+    width: $faceSize;
+    height: $faceSize;
+    padding: $faceSize;
+}
+
+.home-content .viewport {
+    width: 2 * $faceSize;
+    height: 2 * $faceSize;
+    padding: 0;
+}
+
+.home-content .viewport {
+    scale: 2;
+    margin-left: 10%;
+    margin-bottom: 3em;
+}
+
+.cube {
+    transform-origin: $halfFaceSize $halfFaceSize 0px;
+    transform-style: preserve-3d;
+    transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    transition: transform 1s ease;
+}
+
+
+.cube:hover {
+    transform: rotateX(90deg) rotateY(90deg) rotateZ(180deg);
+    transition: transform 1s ease;
+    // animation: 6s linear 0s infinite rotate-solid;
+}
+
+.home-content .cube {
+    animation: 6s linear 0s infinite rotate-solid;
+    animation-fill-mode: backwards;
+}
+
+@keyframes rotate-solid {
+    from {
+        transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    }
+    to {
+        transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
+    }
+}
+
+.cube .face {
+    position: absolute;
+    width: $faceSize;
+    height: $faceSize;
+    opacity: 0.9;
+    font-size:xx-small;
+    color: black;
+}
+
+.cube .front {
+    background-color: $azure;
+    transform: translate3d(0, 0, $octagonInradius);
+}
+
+.cube .back {
+    background-color: $azure;
+    transform: rotateX(180deg) translate3d(0, 0, $octagonInradius);
+}
+
+.cube .top {
+    background-color: white;
+    transform: rotateX(90deg) translate3d(0, 0, $octagonInradius);
+}
+
+.cube .bottom {
+    background-color: white;
+    transform: rotateX(270deg) translate3d(0, 0, $octagonInradius);
+}
+
+.cube .right {
+    background-color: $springGreen;
+    transform: rotateY(90deg) translate3d(0, 0, $octagonInradius);
+}
+
+.cube .left {
+    background-color: $springGreen;
+    transform: rotateY(270deg) translate3d(0, 0, $octagonInradius);
+}
+
+.cube .front-top {
+    background-color: yellow;
+    transform: rotateX(45deg) translate3d(0, 0, $octagonInradius);
+}
+
+.cube .back-bottom {
+    background-color: yellow;
+    transform: rotateX(225deg) translate3d(0, 0, $octagonInradius);
+}
+
+.cube .front-bottom {
+    background-color: magenta;
+    transform: rotateX(315deg) translate3d(0, 0, $octagonInradius);
+}
+
+.cube .back-top {
+    background-color: magenta;
+    transform: rotateX(135deg) translate3d(0, 0, $octagonInradius);
+}
+
+.cube .front-right {
+    background-color: cyan;
+    transform: rotateY(45deg) translate3d(0, 0, $octagonInradius);
+}
+
+.cube .back-left {
+    background-color: cyan;
+    transform: rotateY(225deg) translate3d(0, 0, $octagonInradius);
+}
+
+.cube .front-left {
+    background-color: blue;
+    transform: rotateY(315deg) translate3d(0, 0, $octagonInradius);
+}
+
+.cube .back-right {
+    background-color: blue;
+    transform: rotateY(135deg) translate3d(0, 0, $octagonInradius);
+}
+
+.cube .top-right {
+    background-color: $systemGreen;
+    transform: rotateX(90deg) rotateY(45deg) translate3d(0, 0, $octagonInradius);
+}
+
+.cube .bottom-left {
+    background-color: $systemGreen;
+    transform: rotateX(90deg) rotateY(225deg) translate3d(0, 0, $octagonInradius);
+}
+
+.cube .top-left {
+    background-color: red;
+    transform: rotateX(90deg) rotateY(315deg) translate3d(0, 0, $octagonInradius);
+}
+
+.cube .bottom-right {
+    background-color: red;
+    transform: rotateX(90deg) rotateY(135deg) translate3d(0, 0, $octagonInradius);
+}
+
+.cube .front-top-right {
+    background-color: $chartreuse;
+    transform: rotateY(45deg) rotateX($triangleAngle) translate3d(0, -$triangleYCorrection, $triangleCenterRadius);
+    clip-path: polygon(0% 100%, 100% 100%, 50% calc(100% - $triangleHeight))
+}
+
+.cube .back-bottom-left {
+    background-color: $chartreuse;
+    transform: rotateY(225deg) rotateX(-$triangleAngle) translate3d(0, $triangleYCorrection, $triangleCenterRadius);
+    clip-path: polygon(0% 0%, 100% 0%, 50% $triangleHeight)
+}
+
+.cube .front-top-left {
+    background-color: $systemOrange;
+    transform: rotateY(315deg) rotateX($triangleAngle) translate3d(0, -$triangleYCorrection, $triangleCenterRadius);
+    clip-path: polygon(0% 100%, 100% 100%, 50% calc(100% - $triangleHeight))
+}
+
+.cube .back-bottom-right {
+    background-color: $systemOrange;
+    transform: rotateY(135deg) rotateX(-$triangleAngle) translate3d(0, $triangleYCorrection, $triangleCenterRadius);
+    clip-path: polygon(0% 0%, 100% 0%, 50% $triangleHeight)
+}
+
+.cube .front-bottom-right {
+    background-color: $rose;
+    transform: rotateY(45deg) rotateX(-$triangleAngle) translate3d(0, $triangleYCorrection, $triangleCenterRadius);
+    clip-path: polygon(0% 0%, 100% 0%, 50% $triangleHeight)
+}
+
+.cube .back-top-left {
+    background-color: $rose;
+    transform: rotateY(225deg) rotateX($triangleAngle) translate3d(0, -$triangleYCorrection, $triangleCenterRadius);
+    clip-path: polygon(0% 100%, 100% 100%, 50% calc(100% - $triangleHeight))
+}
+
+.cube .front-bottom-left {
+    background-color: $violet;
+    transform: rotateY(315deg) rotateX(-$triangleAngle) translate3d(0, $triangleYCorrection, $triangleCenterRadius);
+    clip-path: polygon(0% 0%, 100% 0%, 50% $triangleHeight)
+}
+
+.cube .back-top-right {
+    background-color: $violet;
+    transform: rotateY(135deg) rotateX($triangleAngle) translate3d(0, -$triangleYCorrection, $triangleCenterRadius);
+    clip-path: polygon(0% 100%, 100% 100%, 50% calc(100% - $triangleHeight))
+}

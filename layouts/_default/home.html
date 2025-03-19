@@ -1,0 +1,56 @@
+{{ define "main" }}
+  <div class="home-content">
+    <div class="home-viewport-container">
+      <div class="viewport">
+        <div class="cube">
+            <div class="face front"></div>
+            <div class="face front-top"></div>
+            <div class="face top"></div>
+            <div class="face back-top"></div>
+            <div class="face back"></div>
+            <div class="face back-bottom"></div>
+            <div class="face bottom"></div>
+            <div class="face front-bottom"></div>
+            {{/*  front  */}}
+            <div class="face front-right"></div>
+            <div class="face right"></div>
+            <div class="face back-right"></div>
+            {{/*  back  */}}
+            <div class="face back-left"></div>
+            <div class="face left"></div>
+            <div class="face front-left"></div>
+            {{/*  top  */}}
+            <div class="face top-right"></div>
+            {{/*  right  */}}
+            <div class="face bottom-right"></div>
+            {{/*  bottom  */}}
+            <div class="face bottom-left"></div>
+            {{/*  left  */}}
+            <div class="face top-left"></div>
+            {{/*  triangles  */}}
+            <div class="face front-top-right"></div>
+            <div class="face back-top-right"></div>
+            <div class="face back-top-left"></div>
+            <div class="face front-top-left"></div>
+            <div class="face front-bottom-right"></div>
+            <div class="face back-bottom-right"></div>
+            <div class="face back-bottom-left"></div>
+            <div class="face front-bottom-left"></div>
+        </div>
+      </div>
+    </div>
+    
+    {{ .Content }}
+  </div>
+  {{ range site.RegularPages }}
+    <div class="home-links">
+      <a href="{{ .RelPermalink }}">
+        <div class="link-card">
+          <h1>{{ .LinkTitle }}</h1>
+          <div class="blurb-window">{{ .Summary }}</div>
+          <span class="read-more-prompt">[Read more]</span>
+        </div>
+      </a>
+    </div>
+  {{ end }}
+{{ end }}

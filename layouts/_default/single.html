@@ -1,0 +1,62 @@
+{{ define "main" }}
+  <a href="/">
+    <div class="viewport">
+      <div class="cube">
+          <div class="face front"></div>
+          <div class="face front-top"></div>
+          <div class="face top"><div style="transform: rotate(90deg); margin-top: 22%;">Home</div></div>
+          <div class="face back-top"></div>
+          <div class="face back"></div>
+          <div class="face back-bottom"></div>
+          <div class="face bottom"></div>
+          <div class="face front-bottom"></div>
+          {{/*  front  */}}
+          <div class="face front-right"></div>
+          <div class="face right"></div>
+          <div class="face back-right"></div>
+          {{/*  back  */}}
+          <div class="face back-left"></div>
+          <div class="face left"></div>
+          <div class="face front-left"></div>
+          {{/*  top  */}}
+          <div class="face top-right"></div>
+          {{/*  right  */}}
+          <div class="face bottom-right"></div>
+          {{/*  bottom  */}}
+          <div class="face bottom-left"></div>
+          {{/*  left  */}}
+          <div class="face top-left"></div>
+          {{/*  triangles  */}}
+          <div class="face front-top-right"></div>
+          <div class="face back-top-right"></div>
+          <div class="face back-top-left"></div>
+          <div class="face front-top-left"></div>
+          <div class="face front-bottom-right"></div>
+          <div class="face back-bottom-right"></div>
+          <div class="face back-bottom-left"></div>
+          <div class="face front-bottom-left"></div>
+      </div>
+    </div>
+  </a>
+  <section>
+    <h1>{{ .Title }}</h1>
+    {{/*  {{ with .Date }}
+      {{ $dateMachine := . | time.Format "2006-01-02T15:04:05-07:00" }}
+      {{ $dateHuman := . | time.Format ":date_long" }}
+      <time datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
+    {{ end }}  */}}
+    <article>
+      {{ .Content }}
+    </article>
+    <aside>
+      {{ with .GetTerms "tags" }}
+        <div>{{ (index . 0).Parent.LinkTitle }}</div>
+        <ul>
+          {{ range . }}
+            <li><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>
+          {{ end }}
+        </ul>
+      {{ end }}
+    </aside>
+  </section>
+{{ end }}

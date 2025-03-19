@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Test on Bill Marcy</title>
+    <link>http://localhost:1313/tags/test/</link>
+    <description>Recent content in Test on Bill Marcy</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 13 Mar 2025 17:17:10 -0700</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/test/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Test</title>
+      <link>http://localhost:1313/posts/test/</link>
+      <pubDate>Thu, 13 Mar 2025 17:17:10 -0700</pubDate>
+      <guid>http://localhost:1313/posts/test/</guid>
+      <description>&lt;p&gt;This is a test post. Watch it fill up with &lt;em&gt;content&lt;/em&gt; before your &lt;strong&gt;eyes&lt;/strong&gt;. I&amp;rsquo;d like to do a great many things with this website.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
