@@ -73,7 +73,7 @@
 <li><strong>Deployment</strong>: The app is deployed to a Digital Ocean droplet via SSH. An Nginx reverse proxy routes requests made to the Remix and Go servers. Let&rsquo;s Encrypt was used to certify the nginx server to ensure a secure https connection.</li>
 </ul>
 <h2 id="technical-details">Technical Details</h2>
-<p>Here, I&rsquo;ll give a brief outline of Playtree&rsquo;s features, and the tools used to implement Playtree.</p>
+<p>Here, I&rsquo;ll give a brief outline of Playtree and the tools used to implement Playtree.</p>
 <h3 id="backend">Backend</h3>
 <ul>
 <li>I chose <a href="https://go.dev/">Go</a> for the backend due to its efficiency and scalability. The <a href="https://pkg.go.dev/net/http"><code>net/http</code></a> package is used to create RESTful API endpoints.</li>
@@ -93,35 +93,12 @@
 <p>The central component is the Playtree structure, which includes:</p>
 <ul>
 <li><strong>Summary</strong>: Contains metadata like ID, name, creator, and access settings.</li>
-<li><strong>Playnodes</strong>: Individual nodes in the playtree. When playback enters a playnode, its songs will be played.
-<ul>
-<li><strong>Type</strong>
-<ul>
-<li><strong>Sequencer</strong> playnodes play all their songs in order before playback is transferred.</li>
-<li><strong>Selector</strong> playnodes, on the other hand, randomly choose one of their songs to play before playback is transferred.</li>
+<li><strong>Playnodes</strong>: Individual nodes in the playtree. When playback enters a playnode, its songs will be played.</li>
+<li><strong>Playedges</strong>: Possible paths playback can follow from one playnode to another. After playback finishes at a playnode, one of its outgoing playedges is randomly selected.</li>
+<li><strong>Playroots</strong>: Starting points for playback. If there are multiple playroots, then a user can switch between multiple playheads while listening.</li>
+<li><strong>Playscopes</strong>: Subregions of the playtree graph that define a local scope for play counters, which are maintained during playback to limit playnodes, playedges, and songs. If playback exits a playscope, all counters within the scope are reset to 0.</li>
 </ul>
-</li>
-<li><strong>Limit</strong>: Sets a limit on how many times a playnode can be played. A limited playnode will pass playback on one of its outgoing edges without playing any of its songs.</li>
-<li><strong>Repeat</strong>: Repeats the same playnode before selecting a playedge to walk.</li>
-<li><strong>Playitems</strong>: The list of songs the playnode should play.
-<ul>
-<li><strong>Multiplier</strong>: Repeats a song in a sequencer node, and weights a song&rsquo;s chances of selection in a selector node.</li>
-<li><strong>Limit</strong>: Sets a limit on how many times a song can be played. A limited song will be skipped over in a sequencer, and will not be selected in a selector.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><strong>Playedges</strong>: After playback finishes at a playnode, one of its outgoing playedges is randomly selected. The target playnode of the selected playedge then takes up playback.
-<ul>
-<li><strong>Limit</strong>: Sets a limit on how many times a playedge can be walked. A limited playedge won&rsquo;t be elligible for selection by its source playnode.</li>
-<li><strong>Shares</strong>: Weights the likelihood a playedge is selected.</li>
-<li><strong>Priority</strong>: Forces the highest priority playedges to be selected first.</li>
-</ul>
-</li>
-<li><strong>Playroots</strong>: The starting points for playback. If there are multiple playroots, then a user can switch between multiple playheads while listening.</li>
-<li><strong>Playscopes</strong>: Counters are maintained to ensure playnodes, playedges, and playitems are correctly limited. A playscope is a subregion of the playtree graph that defines a local scope for these play counters. If playback exits a playscope, all counters within the scope are reset to 0.</li>
-</ul>
-<p>To ensure data integrity, I&rsquo;ve implemented server-side syntax validation using a Go <a href="https://github.com/go-playground/validator/v10">validator</a> library as well as client-side semantic validation.</p>
+<p>To ensure data integrity, I&rsquo;ve implemented server-side syntax validation using a Go <a href="https://pkg.go.dev/github.com/go-playground/validator/v10">validator</a> library as well as client-side semantic validation.</p>
 <h3 id="key-features">Key Features</h3>
 <ul>
 <li><strong>Playtree Creation and Editing</strong>: Users can intuitively create, modify, share and manage their playtrees, defining complex playback structures.</li>

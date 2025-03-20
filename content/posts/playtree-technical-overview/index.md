@@ -19,7 +19,7 @@ Key aspects of the project include:
 
 ## Technical Details
 
-Here, I'll give a brief outline of Playtree's features, and the tools used to implement Playtree.
+Here, I'll give a brief outline of Playtree and the tools used to implement Playtree.
 
 ### Backend
 
@@ -39,22 +39,11 @@ Here, I'll give a brief outline of Playtree's features, and the tools used to im
 The central component is the Playtree structure, which includes:
 - **Summary**: Contains metadata like ID, name, creator, and access settings.
 - **Playnodes**: Individual nodes in the playtree. When playback enters a playnode, its songs will be played.
-    - **Type**
-        - **Sequencer** playnodes play all their songs in order before playback is transferred.
-        - **Selector** playnodes, on the other hand, randomly choose one of their songs to play before playback is transferred.
-    - **Limit**: Sets a limit on how many times a playnode can be played. A limited playnode will pass playback on one of its outgoing edges without playing any of its songs.
-    - **Repeat**: Repeats the same playnode before selecting a playedge to walk.
-    - **Playitems**: The list of songs the playnode should play.
-        - **Multiplier**: Repeats a song in a sequencer node, and weights a song's chances of selection in a selector node.
-        - **Limit**: Sets a limit on how many times a song can be played. A limited song will be skipped over in a sequencer, and will not be selected in a selector.
-- **Playedges**: After playback finishes at a playnode, one of its outgoing playedges is randomly selected. The target playnode of the selected playedge then takes up playback.
-    - **Limit**: Sets a limit on how many times a playedge can be walked. A limited playedge won't be elligible for selection by its source playnode.
-    - **Shares**: Weights the likelihood a playedge is selected.
-    - **Priority**: Forces the highest priority playedges to be selected first.
-- **Playroots**: The starting points for playback. If there are multiple playroots, then a user can switch between multiple playheads while listening.
-- **Playscopes**: Counters are maintained to ensure playnodes, playedges, and playitems are correctly limited. A playscope is a subregion of the playtree graph that defines a local scope for these play counters. If playback exits a playscope, all counters within the scope are reset to 0.
+- **Playedges**: Possible paths playback can follow from one playnode to another. After playback finishes at a playnode, one of its outgoing playedges is randomly selected.
+- **Playroots**: Starting points for playback. If there are multiple playroots, then a user can switch between multiple playheads while listening.
+- **Playscopes**: Subregions of the playtree graph that define a local scope for play counters, which are maintained during playback to limit playnodes, playedges, and songs. If playback exits a playscope, all counters within the scope are reset to 0.
 
-To ensure data integrity, I've implemented server-side syntax validation using a Go [validator](https://github.com/go-playground/validator/v10) library as well as client-side semantic validation.
+To ensure data integrity, I've implemented server-side syntax validation using a Go [validator](https://pkg.go.dev/github.com/go-playground/validator/v10) library as well as client-side semantic validation.
 
 ### Key Features
 - **Playtree Creation and Editing**: Users can intuitively create, modify, share and manage their playtrees, defining complex playback structures.
