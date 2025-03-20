@@ -36,7 +36,7 @@ Here, I'll give a brief outline of Playtree and the tools used to implement Play
 - Custom hooks, like `useClickOutside`, are implemented to handle specific UI behaviors.
 
 ### Data Model
-The central component is the Playtree structure, which includes:
+The central data structure is the Playtree. It is created and updated by the playtree editor, stored as JSON on the server, and used by the player to dictate playback. It includes the following:
 - **Summary**: Contains metadata like ID, name, creator, and access settings.
 - **Playnodes**: Individual nodes in the playtree. When playback enters a playnode, its songs will be played.
 - **Playedges**: Possible paths playback can follow from one playnode to another. After playback finishes at a playnode, one of its outgoing playedges is randomly selected.
