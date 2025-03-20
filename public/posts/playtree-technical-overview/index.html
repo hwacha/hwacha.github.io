@@ -61,75 +61,81 @@
     <h1>Playtree Technical Overview</h1>
     
     <article>
-      <p>Playtree lets users create and manage personalized music playlists that branch and loop playback. In this post, I&rsquo;ll explore the technical challenges and solutions I encountered while building Playtree.</p>
-<h2 id="overview">Overview</h2>
-<p>Playtree is designed to provide a novel way to interact with music. Instead of traditional linear playlists, Playtree uses a graph structure where users create <em>playnodes</em> representing musical elements, and <em>playedges</em> to define the flow of playback. Multiple playheads can be maintained simultaneously within the same playtree.</p>
+      <p>Playtree is an application for making and listening to <em>playtrees</em>, which are like playlists, except that playback can branch, loop, and start at multiple entry points. You can try out playtree <a href="https://playtree.gdn">here</a>. In this post, I&rsquo;ll provide a broad overview of Playtree and its development.</p>
+<h2 id="at-a-glance">At a Glance</h2>
+<p>Playtree is a web application for creating custom playtrees, which are repesented like directed graphs. Playnodes represent songs to be played, and playedges represent a possible, randomly selected path for playback to follow after playback at a playnode is completed.</p>
 <p>Key aspects of the project include:</p>
 <ul>
-<li><strong>Backend Development</strong>: A RESTful API built with Go handles data persistence.</li>
-<li><strong>Frontend Development</strong>: A dynamic user interface developed with React allows users to create, edit and play their playtrees.</li>
-<li><strong>Data Structures and Algorithms</strong>: The application uses a graph data structure to represent playlists and algorithms to manage music playback.</li>
+<li><strong>Backend Development</strong>: A RESTful API built with Go stores created playtrees for listening or further editing, authenticates data requests via Spotify, and caches a user&rsquo;s selected playtree to load their player for future sessions.</li>
+<li><strong>Frontend Development</strong>: A dynamic user interface developed with React and React Flow allows users to create, edit, share, and play their playtrees. Remix is used for routing and data handling. The Spotify Web Playback SDK is used for an in-app music player.</li>
+<li><strong>Deployment</strong>: The app is deployed to a Digital Ocean droplet via SSH. An Nginx reverse proxy routes requests made to the Remix and Go servers. Let&rsquo;s Encrypt was used to certify the nginx server to ensure a secure https connection.</li>
 </ul>
 <h2 id="technical-details">Technical Details</h2>
 <p>Here, I&rsquo;ll give a brief outline of Playtree&rsquo;s features, and the tools used to implement Playtree.</p>
 <h3 id="backend">Backend</h3>
 <ul>
-<li>I chose Go for the backend due to its efficiency and scalability. The net/http package is used to create RESTful API endpoints.</li>
-<li>Playtree data, including playlist structures, are stored in JSON files. This provides a simple way to persist and manage data.</li>
-<li>A Go <a href="https://github.com/lithammer/shortuuid">shortuuid</a> library is used to generate unique IDs for each playtree.</li>
-<li>A core feature of Playtree is its integration with the Spotify API. The Go server authenticates certain user requests via Spotify access tokens, which are used as proxies for the user&rsquo;s identity.</li>
+<li>I chose <a href="https://go.dev/">Go</a> for the backend due to its efficiency and scalability. The <a href="https://pkg.go.dev/net/http"><code>net/http</code></a> package is used to create RESTful API endpoints.</li>
+<li>Playtree data, including playlist structures, are stored as JSON files. This provides a simple way to persist and manage data. The Go server parses and validates JSON files before they are created or updated.</li>
+<li>The <a href="https://github.com/lithammer/shortuuid">shortuuid</a> library is used to generate unique IDs for each playtree.</li>
+<li>The Playtree server authenticates certain user requests via Spotify access tokens, which are used as a proxy for the user&rsquo;s identity in place of a dedicated Playtree account.</li>
 </ul>
 <h3 id="frontend">Frontend</h3>
 <ul>
-<li>The frontend is built with <a href="https://react.dev/">React</a>, a powerful library for creating interactive user interfaces. React Flow, a library for rendering and interacting with graphs, is used to build the playtree visualization and editing tools, with Dagre for auto-layouting.</li>
-<li>I used <a href="https://remix.run/">Remix</a> for routing, enabling smooth navigation within the application.</li>
-<li>Reducers are used for state management, helping to cleanly and efficiently update the UI in response to user interactions.</li>
+<li>The frontend is built with <a href="https://react.dev/">React</a>.</li>
+<li><a href="https://reactflow.dev/">React Flow</a>, a library for rendering and interacting with graphs, is used to build the playtree visualization and editing tools. The <a href="https://github.com/dagrejs/dagre#readme">Dagre</a> library is used for graph auto-layouting.</li>
+<li><a href="https://remix.run/">Remix</a> is used for routing, enabling smooth navigation within the application which importantly does not interrupt music playback. Remix also provides a canonical way to manage data flow from server to client.</li>
+<li>React&rsquo;s built-in <a href="https://react.dev/reference/react/useReducer">reducers</a> are used for state management, helping to cleanly and efficiently update complex UI in response to user interactions.</li>
 <li>Custom hooks, like <code>useClickOutside</code>, are implemented to handle specific UI behaviors.</li>
 </ul>
 <h3 id="data-model">Data Model</h3>
-<ul>
-<li>The central component is the Playtree structure, which includes:
+<p>The central component is the Playtree structure, which includes:</p>
 <ul>
 <li><strong>Summary</strong>: Contains metadata like ID, name, creator, and access settings.</li>
-<li><strong>Playnodes</strong>: Represent individual nodes in the playtree, containing information about musical elements.
+<li><strong>Playnodes</strong>: Individual nodes in the playtree. When playback enters a playnode, its songs will be played.
 <ul>
-<li><strong>Limit</strong>: sets a limit on how many times a playnode can be played.</li>
-<li><strong>Repeat</strong>: repeats the same playnode before selecting a playedge to walk.</li>
-</ul>
-</li>
-<li><strong>Playedges</strong>: Define the connections between nodes, establishing the flow of music.
+<li><strong>Type</strong>
 <ul>
-<li><strong>Limit</strong>: sets a limit on how many times a playedge can be walked.</li>
-<li><strong>Shares</strong>: weights the likelihood a playedge is selected.</li>
-<li><strong>Priority</strong>: forces the highest priority playedges to be selected first.</li>
+<li><strong>Sequencer</strong> playnodes play all their songs in order before playback is transferred.</li>
+<li><strong>Selector</strong> playnodes, on the other hand, randomly choose one of their songs to play before playback is transferred.</li>
 </ul>
 </li>
-<li><strong>Playroots</strong>: Define starting points for playback.</li>
-<li><strong>Playscopes</strong>: Contextual scopes which restrict play counters to local contexts.</li>
+<li><strong>Limit</strong>: Sets a limit on how many times a playnode can be played. A limited playnode will pass playback on one of its outgoing edges without playing any of its songs.</li>
+<li><strong>Repeat</strong>: Repeats the same playnode before selecting a playedge to walk.</li>
+<li><strong>Playitems</strong>: The list of songs the playnode should play.
+<ul>
+<li><strong>Multiplier</strong>: Repeats a song in a sequencer node, and weights a song&rsquo;s chances of selection in a selector node.</li>
+<li><strong>Limit</strong>: Sets a limit on how many times a song can be played. A limited song will be skipped over in a sequencer, and will not be selected in a selector.</li>
 </ul>
 </li>
-<li>To ensure data integrity, I&rsquo;ve implemented server-side syntax validation using a Go <a href="https://github.com/go-playground/validator/v10">validator</a> library and client-side semantic validation.</li>
 </ul>
+</li>
+<li><strong>Playedges</strong>: After playback finishes at a playnode, one of its outgoing playedges is randomly selected. The target playnode of the selected playedge then takes up playback.
+<ul>
+<li><strong>Limit</strong>: Sets a limit on how many times a playedge can be walked. A limited playedge won&rsquo;t be elligible for selection by its source playnode.</li>
+<li><strong>Shares</strong>: Weights the likelihood a playedge is selected.</li>
+<li><strong>Priority</strong>: Forces the highest priority playedges to be selected first.</li>
+</ul>
+</li>
+<li><strong>Playroots</strong>: The starting points for playback. If there are multiple playroots, then a user can switch between multiple playheads while listening.</li>
+<li><strong>Playscopes</strong>: Counters are maintained to ensure playnodes, playedges, and playitems are correctly limited. A playscope is a subregion of the playtree graph that defines a local scope for these play counters. If playback exits a playscope, all counters within the scope are reset to 0.</li>
+</ul>
+<p>To ensure data integrity, I&rsquo;ve implemented server-side syntax validation using a Go <a href="https://github.com/go-playground/validator/v10">validator</a> library as well as client-side semantic validation.</p>
 <h3 id="key-features">Key Features</h3>
 <ul>
-<li><strong>Playtree Creation and Editing</strong>: Users can intuitively create, modify, and manage their playtrees, defining the structure and rules for playback.</li>
-<li><strong>Spotify Integration</strong>: Deep integration with the Spotify API enables music search, user authentication, and playback control.</li>
-<li><strong>Personalized Playback</strong>: Playtree uses the defined structure and rules to generate a unique and personalized listening experience.</li>
+<li><strong>Playtree Creation and Editing</strong>: Users can intuitively create, modify, share and manage their playtrees, defining complex playback structures.</li>
+<li><strong>Spotify Integration</strong>: Integration with the Spotify API enables music search, user authentication, and playback control.</li>
+<li><strong>Advanced Playback</strong>: The playtree player manages music playback in ways extended beyond normal playlists, offering the user fun, novel, and useful listening experiences.</li>
 </ul>
 <h2 id="challenges-and-solutions">Challenges and Solutions</h2>
 <h3 id="ui-for-the-playtree-editor">UI for the Playtree editor</h3>
-<p>I wanted to create an intuitive, fun UI for making and visualizing complex playtrees. Playtrees are graph structures, so I used <a href="https://reactflow.dev/">React Flow</a>, a library for rendering and interacting with graphs. The editor displays highly customized nodes and edges using React Flow. At the same time, I wanted to keep the playtree data structure, as maintained on the server, as the editor&rsquo;s source of truth. Keeping the React Flow UI synced with the playtree data required a nuanced understanding of React&rsquo;s resolution algorithm: if React cannot determine that a node remains the same from one render to another, for example, it will destroy the underlying HTML and recreate it for the next render. This isn&rsquo;t only a performance issue; in some cases, it will lead to critical UI bugs like losing focus on a text input while typing. I carefully syncronized the central playtree state with the React Flow UI state to ensure a clean data flow while avoiding any UI bugs.</p>
-<p>Although many of the rules governing valid playtrees are implicitly enforced by the editor UI, there are some features which must be checked before a playtree is saved. I perform client-side validation before a playtree is saved, which issues warnings to a user when their playtree doesn&rsquo;t have a playroot attached (meaning playback won&rsquo;t start anywhere if they try to play). This playtree is considered valid—it doesn&rsquo;t violate any playtree rules—but the editor still issues a warning on save, as the user most likely didn&rsquo;t intend to make a playtree that doesn&rsquo;t start playback anywhere. The editor also checks if a user&rsquo;s playscopes are valid. Playscopes can&rsquo;t partially overlap other playscopes, or be redundant. A playtree with invalid playscopes can&rsquo;t unambiguously apply scope rules, and so it is invalid as a playtree. When the user tries to save a invalid playtree, an error is reported in the editor and saving is prevented.</p>
+<p>I used React Flow to implement an interactive graph editor. Synchronizing the UI state with the playtree data took a careful approach and a deep understanding of React&rsquo;s resolution algorithm.</p>
+<p>See <a href="/posts/playtree-editor-ui">this post</a> for more.</p>
 <h3 id="managing-playback-logic-and-state">Managing playback logic and state</h3>
-<p>The rules that govern playback on a playtree are rather complicated. The user can play and pause audio, skip forward a song, go back to previously played songs, which must be memoized when playback is randomly selected. Additionally, a user can switch between playheads.</p>
-<p>I use a <a href="https://react.dev/reference/react/useReducer">reducer</a> to handle playback logic. The reducers handle all necessary logic in order to transition from one song to the next. When a song ends or if the user skips forward, a new song is selected either by moving through a playnode or by randomly selecting the next playnode according to the playedge rules. A history stack is maintained on each playhead, which holds a reference to previously visited playnodes and playedges, and a copy of old play counters, if they had changed when visiting that node or edge. Playscopes are preprocessed and placed within maps indexed by playnode so that they can reset play counters when needed.</p>
-<p>If a playnode has reached its play limit, or if it has no songs, playback will iteratively skip forward and try to find a song to play. As far as the user is concerned, this happens instantaneously: there should be almost no perceivable time between songs, no matter how many playnodes are skipped over in between. This introduces the possibility of what I&rsquo;ve been calling a &ldquo;zoom condition&rdquo;. In a program where computation is meant to be punctuated by breaks (in this case, waiting for a song to finish), a zoom condition, as I&rsquo;m using it, is a state which causes the program to do too much intermediary computation without reaching a break point (i.e., finding a new song to play). In Playtree, a zoom condition is easily introduced by a playnode which has no songs and loops infinitely. If unchecked, a zoom condition can cause problems like crashing, freezing, or stalling. In order to prevent zoom conditions, I incorporate a loop counter. If a song is not found within 10,000 iterations of node traversal, playback resets to the beginning of a playnode.</p>
-<h3 id="integrating-with-the-spotify-api-for-authentication-and-seamless-music-playback">Integrating with the Spotify API for authentication and seamless music playback.</h3>
-<p>Playtree uses the <a href="https://developer.spotify.com/documentation/web-api">Spotify API</a> to search for tracks on Spotify, and to play music within Playtree. I also use the <a href="https://developer.spotify.com/documentation/web-playback-sdk">Spotify Web Playback SDK</a>, which allows for Spotify playback to occur within the app itself, and for certain events pertaining to Spotify playback to be reported real-time to the application.</p>
-<p>Spotify API calls must be authenticated, and so I use the Authorization Code flow to obtain an access token from the server side. I need to use the access token on both the client side (because the Web Playback SDK can only be used client-side) and server side (because my server uses Spotify tokens as a proxy for the user&rsquo;s identity within the site). Access tokens are stored as a cookie.</p>
-<p>The Playtree client can control Spotify playback, but playback can be controlled in certain ways on other Spotify clients as well. Playback can be transferred from the web player device to another device, a user can change the song that&rsquo;s playing on Spotify manually on the Spotify client, etc. The web player emits events when some of these changes occur, and I can compare the internal Playtree player state to the Spotify state as reported by the web player. With that, I can report when playback has gotten out of sync with Spotify, and offer a user the option to resync.</p>
-<p>A subtle challenge has to do with Playtree&rsquo;s preferred playback flow versus Spotify&rsquo;s preferred flow. Spotify prefers for a user to set up a context—a playlist or an album, for example—and to automatically queue up upcoming songs to play next. Spotify even has an autoplay feature which will play related songs once a context is completed. However, Playtree instead prefers for songs to be loaded individually, only selecting the next song to play once the current song is over. A user can see on their Spotify queue what songs are coming up next; because randomness is so central to Playtree, I wanted the song that would be selected to be a surprise to the user when it first started playing. Also, if work on this project continues, a nice feature would be to allow the user to manually override random selection of the next song; thus, the next song should be open throughout the course of the currently playing song. Still, playback should move more or less seamlessly from one song to the next.</p>
-<p>To integrate this just-in-time approach with Spotify, I had to be clever. I didn&rsquo;t want to poll the Spotify <code>/me/player</code> endpoint, because Spotify API calls are rate-limited. Also, I didn&rsquo;t want to rely on a timeout function, changing the song once the duration of the current song had elapsed, as it could easily get out of sync with the actual state of the Spotify player. So, that left the events emitted by the Spotify web player. Unlike HTML <code>&lt;audio&gt;</code> elements, the Spotify web player doesn&rsquo;t come with a dedicated <code>ended</code> event; rather, a song&rsquo;s completion must be inferred from other properties of playback. Certain features reliably correlated with a track&rsquo;s completion: the same song would be playing, except its playback would be reset to 0 and playback would be paused. I also store a timestamp on the Playtree playhead of the last time synchronized playback on a song was started. If the time elapsed since starting playback matches the time remaining on the current song, and a playback event with the right features is received, it is inferred that the song is over and that a new song should be selected.</p>
+<p>Managing a playtree&rsquo;s playback is more involved than it is for an ordinary playlist. Multiple playheads are maintained, playback can loop and randomly branch, and plays on a playnode or playedge can be limited. As a result, implementing the player logic was a complicated task.</p>
+<p>See <a href="/posts/playtree-player-logic">this post</a> for more.</p>
+<h3 id="integrating-the-spotify-api">Integrating the Spotify API</h3>
+<p>Playtree uses the Spotify API to play music. This introduces the need for an authentication scheme. Also, because playback occurs on a Spotify device, it can be altered by other Spotify clients during Playtree playback. It was important to efficiently and comprehensively synchronize the Playtree playback state with the Spotify playback state in real time.</p>
+<p>See <a href="/posts/playtree-spotify-integration">this post</a> for more.</p>
 <h2 id="conclusion">Conclusion</h2>
 <p>The Playtree application touched on many key aspects of web development, and offered some specific challenges as well. Now that it&rsquo;s up and running, I&rsquo;m pleasantly surprised that such a speculatively designed application could be so fun to use. It even seems like it&rsquo;ll have its use cases. I look forward to expanding upon and refining Playtree moving forward.</p>
 

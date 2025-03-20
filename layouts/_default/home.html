@@ -44,11 +44,10 @@
   </div>
   {{ range site.RegularPages }}
     <div class="home-links">
-      <a href="{{ .RelPermalink }}">
-        <div class="link-card">
-          <h1>{{ .LinkTitle }}</h1>
+        <div class="blurb-card">
+          <a href="{{ .RelPermalink }}" style="text-decoration:none; color: inherit;"><h1>{{ .LinkTitle }}</h1></a>
           <div class="blurb-window">{{ .Summary }}</div>
-          <span class="read-more-prompt">[Read more]</span>
+          <a href="{{ .RelPermalink }}">[Read more]</a>
         </div>
       </a>
     </div>

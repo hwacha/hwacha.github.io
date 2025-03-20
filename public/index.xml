@@ -6,14 +6,35 @@
     <description>Recent content in Home on Bill Marcy</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 18 Mar 2025 12:55:36 -0700</lastBuildDate>
+    <lastBuildDate>Wed, 19 Mar 2025 15:23:36 -0700</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Playtree Spotify Integration</title>
+      <link>http://localhost:1313/posts/playtree-spotify-integration/</link>
+      <pubDate>Wed, 19 Mar 2025 15:23:36 -0700</pubDate>
+      <guid>http://localhost:1313/posts/playtree-spotify-integration/</guid>
+      <description>&lt;p&gt;Playtree uses the &lt;a href=&#34;https://developer.spotify.com/documentation/web-api&#34;&gt;Spotify API&lt;/a&gt; to search for tracks on Spotify, and to play music within Playtree. I also use the &lt;a href=&#34;https://developer.spotify.com/documentation/web-playback-sdk&#34;&gt;Spotify Web Playback SDK&lt;/a&gt;, which allows for Spotify playback to occur within the app itself, and for certain events pertaining to Spotify playback to be reported real-time to the application.&lt;/p&gt;&#xA;&lt;p&gt;Spotify API calls must be authenticated, and so I use the Authorization Code flow to obtain an access token from the server side. I need to use the access token on both the client side (because the Web Playback SDK can only be used client-side) and server side (because my server uses Spotify tokens as a proxy for the user&amp;rsquo;s identity within the site). Access tokens are stored as a cookie.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Playtree Player Logic</title>
+      <link>http://localhost:1313/posts/playtree-player-logic/</link>
+      <pubDate>Wed, 19 Mar 2025 15:09:52 -0700</pubDate>
+      <guid>http://localhost:1313/posts/playtree-player-logic/</guid>
+      <description>&lt;p&gt;The rules that govern playback on a playtree are rather complicated. The user can play and pause audio, skip forward a song, go back to previously played songs, which must be memoized when playback is randomly selected. Additionally, a user can switch between playheads.&lt;/p&gt;&#xA;&lt;p&gt;I use a &lt;a href=&#34;https://react.dev/reference/react/useReducer&#34;&gt;reducer&lt;/a&gt; to handle playback logic. The reducers handle all necessary logic in order to transition from one song to the next. When a song ends or if the user skips forward, a new song is selected either by moving through a playnode or by randomly selecting the next playnode according to the playedge rules. A history stack is maintained on each playhead, which holds a reference to previously visited playnodes and playedges, and a copy of old play counters, if they had changed when visiting that node or edge. Playscopes are preprocessed and placed within maps indexed by playnode so that they can reset play counters when needed.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Playtree Editor UI</title>
+      <link>http://localhost:1313/posts/playtree-editor-ui/</link>
+      <pubDate>Wed, 19 Mar 2025 14:36:22 -0700</pubDate>
+      <guid>http://localhost:1313/posts/playtree-editor-ui/</guid>
+      <description>&lt;p&gt;I wanted to create an intuitive, fun UI for making and visualizing complex playtrees. Playtrees are graph structures, so I used &lt;a href=&#34;https://reactflow.dev/&#34;&gt;React Flow&lt;/a&gt;, a library for rendering and interacting with graphs. The editor displays highly customized nodes and edges using React Flow. At the same time, I wanted to keep the playtree data structure, as maintained on the server, as the editor&amp;rsquo;s source of truth. Keeping the React Flow UI synced with the playtree data required a nuanced understanding of React&amp;rsquo;s resolution algorithm: if React cannot determine that a node remains the same from one render to another, for example, it will destroy the underlying HTML and recreate it for the next render. This isn&amp;rsquo;t only a performance issue; in some cases, it will lead to critical UI bugs like losing focus on a text input while typing. I carefully syncronized the central playtree state with the React Flow UI state to ensure a clean data flow while avoiding any UI bugs.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Playtree Technical Overview</title>
       <link>http://localhost:1313/posts/playtree-technical-overview/</link>
       <pubDate>Tue, 18 Mar 2025 12:55:36 -0700</pubDate>
       <guid>http://localhost:1313/posts/playtree-technical-overview/</guid>
-      <description>&lt;p&gt;Playtree lets users create and manage personalized music playlists that branch and loop playback. In this post, I&amp;rsquo;ll explore the technical challenges and solutions I encountered while building Playtree.&lt;/p&gt;&#xA;&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;&#xA;&lt;p&gt;Playtree is designed to provide a novel way to interact with music. Instead of traditional linear playlists, Playtree uses a graph structure where users create &lt;em&gt;playnodes&lt;/em&gt; representing musical elements, and &lt;em&gt;playedges&lt;/em&gt; to define the flow of playback. Multiple playheads can be maintained simultaneously within the same playtree.&lt;/p&gt;</description>
+      <description>&lt;p&gt;Playtree is an application for making and listening to &lt;em&gt;playtrees&lt;/em&gt;, which are like playlists, except that playback can branch, loop, and start at multiple entry points. You can try out playtree &lt;a href=&#34;https://playtree.gdn&#34;&gt;here&lt;/a&gt;. In this post, I&amp;rsquo;ll provide a broad overview of Playtree and its development.&lt;/p&gt;&#xA;&lt;h2 id=&#34;at-a-glance&#34;&gt;At a Glance&lt;/h2&gt;&#xA;&lt;p&gt;Playtree is a web application for creating custom playtrees, which are repesented like directed graphs. Playnodes represent songs to be played, and playedges represent a possible, randomly selected path for playback to follow after playback at a playnode is completed.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

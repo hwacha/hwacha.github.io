@@ -3,7 +3,7 @@ $faceSize: 30px;
 // derived
 $halfFaceSize: $faceSize / 2;
 $octagonInradius: calc((1 + sqrt(2)) * $halfFaceSize);
-$triangleYCorrection: 0.2113 * $faceSize;
+$triangleYCorrection: 0.213 * $faceSize;
 $triangleAngle: calc(acos(sqrt(6)/3));
 $triangleCenterRadius: calc((((3*sqrt(3)) + sqrt(6))/6) * $faceSize);
 $triangleHeight: calc(sqrt(3)*50%);
@@ -170,7 +170,7 @@ $rose: #FF0080;
 .cube .front-top-right {
     background-color: $chartreuse;
     transform: rotateY(45deg) rotateX($triangleAngle) translate3d(0, -$triangleYCorrection, $triangleCenterRadius);
-    clip-path: polygon(0% 100%, 100% 100%, 50% calc(100% - $triangleHeight))
+    clip-path: polygon(0% 100%, 100% 100%, 50% calc(100% - $triangleHeight));
 }
 
 .cube .back-bottom-left {

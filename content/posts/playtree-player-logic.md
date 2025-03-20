@@ -1,0 +1,10 @@
++++
+date = '2025-03-19T15:09:52-07:00'
+draft = true
+title = 'Playtree Player Logic'
++++
+The rules that govern playback on a playtree are rather complicated. The user can play and pause audio, skip forward a song, go back to previously played songs, which must be memoized when playback is randomly selected. Additionally, a user can switch between playheads.
+
+I use a [reducer](https://react.dev/reference/react/useReducer) to handle playback logic. The reducers handle all necessary logic in order to transition from one song to the next. When a song ends or if the user skips forward, a new song is selected either by moving through a playnode or by randomly selecting the next playnode according to the playedge rules. A history stack is maintained on each playhead, which holds a reference to previously visited playnodes and playedges, and a copy of old play counters, if they had changed when visiting that node or edge. Playscopes are preprocessed and placed within maps indexed by playnode so that they can reset play counters when needed.
+
+If a playnode has reached its play limit, or if it has no songs, playback will iteratively skip forward and try to find a song to play. As far as the user is concerned, this happens instantaneously: there should be almost no perceivable time between songs, no matter how many playnodes are skipped over in between. This introduces the possibility of what I've been calling a "zoom condition". In a program where computation is meant to be punctuated by breaks (in this case, waiting for a song to finish), a zoom condition, as I'm using it, is a state which causes the program to do too much intermediary computation without reaching a break point (i.e., finding a new song to play). In Playtree, a zoom condition is easily introduced by a playnode which has no songs and loops infinitely. If unchecked, a zoom condition can cause problems like crashing, freezing, or stalling. In order to prevent zoom conditions, I incorporate a loop counter. If a song is not found within 10,000 iterations of node traversal, playback resets to the beginning of a playnode.
