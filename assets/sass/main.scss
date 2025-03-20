@@ -85,3 +85,16 @@ img {
     border: 3px solid light-dark(rgba(0, 0, 0, 0.9), rgba(255, 255, 255, 0.9));
     border-radius: 1em;
 }
+
+code {
+    background-color: light-dark(rgba(150, 150, 150, 0.5), rgba(50, 50, 50, 0.5));
+    padding: 4px;
+    border-radius: 4px;
+}
+
+pre > code {
+    display: flex;
+    width: calc(100% - 18px);
+    padding-left: 1em;
+    text-wrap-mode: wrap;
+}

@@ -6,8 +6,15 @@
     <description>Recent content in Home on Bill Marcy</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 19 Mar 2025 15:23:36 -0700</lastBuildDate>
+    <lastBuildDate>Wed, 19 Mar 2025 19:44:50 -0700</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Some Nifty MacOS Terminal Commands</title>
+      <link>http://localhost:1313/posts/some-nifty-macos-terminal-commands/</link>
+      <pubDate>Wed, 19 Mar 2025 19:44:50 -0700</pubDate>
+      <guid>http://localhost:1313/posts/some-nifty-macos-terminal-commands/</guid>
+      <description>&lt;p&gt;In the course of making &lt;a href=&#34;http://localhost:1313/posts/playtree-technical-overview&#34;&gt;Playtree&lt;/a&gt;, I came across some esoteric terminal commands for MacOS. To start with the least useful:&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;afplay &amp;lt;audio_file&amp;gt;&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;will play a specified audio file from the command line. I used this in an early CLI prototype for Playtree, but its utility is pretty limited. There&amp;rsquo;s no way to control audio once playback starts. You can stop playback by sending an interrupt signal with &lt;code&gt;CTRL-C&lt;/code&gt;, and you can &amp;ldquo;mute&amp;rdquo; audio by suspending the process with &lt;code&gt;CTRL-Z&lt;/code&gt;. This doesn&amp;rsquo;t pause playback, though. It&amp;rsquo;s still playing through silently in the background.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Playtree Spotify Integration</title>
       <link>http://localhost:1313/posts/playtree-spotify-integration/</link>
