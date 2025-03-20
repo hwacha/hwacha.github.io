@@ -34,7 +34,7 @@
       <link>http://localhost:1313/posts/playtree-technical-overview/</link>
       <pubDate>Tue, 18 Mar 2025 12:55:36 -0700</pubDate>
       <guid>http://localhost:1313/posts/playtree-technical-overview/</guid>
-      <description>&lt;p&gt;Playtree is an application for making and listening to &lt;em&gt;playtrees&lt;/em&gt;, which are like playlists, except that playback can branch, loop, and start at multiple entry points. You can try out playtree &lt;a href=&#34;https://playtree.gdn&#34;&gt;here&lt;/a&gt;. In this post, I&amp;rsquo;ll provide a broad overview of Playtree and its development.&lt;/p&gt;&#xA;&lt;h2 id=&#34;at-a-glance&#34;&gt;At a Glance&lt;/h2&gt;&#xA;&lt;p&gt;Playtree is a web application for creating custom playtrees, which are repesented like directed graphs. Playnodes represent songs to be played, and playedges represent a possible, randomly selected path for playback to follow after playback at a playnode is completed.&lt;/p&gt;</description>
+      <description>&lt;p&gt;Playtree is an application for making and listening to &lt;em&gt;playtrees&lt;/em&gt;, which are like playlists, except that playback can branch, loop, and start at multiple entry points. You can try out playtree &lt;a href=&#34;https://playtree.gdn&#34;&gt;here&lt;/a&gt;. In this post, I&amp;rsquo;ll provide a broad overview of Playtree and its development.&lt;/p&gt;&#xA;&lt;h2 id=&#34;at-a-glance&#34;&gt;At a Glance&lt;/h2&gt;&#xA;&lt;p&gt;&lt;img src=&#34;example-playtree.png&#34; alt=&#34;alt&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;Playtree is a web application for creating custom playtrees, which are directed graphs. Playnodes contain songs to be played, and playedges define a path playback can follow.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

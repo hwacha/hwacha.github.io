@@ -79,3 +79,9 @@ a:visited {
 ::selection, ::-moz-selection {
     background: hsl(276, 33%, 60%);
 }
+
+img {
+    width: 100%;
+    border: 3px solid light-dark(rgba(0, 0, 0, 0.9), rgba(255, 255, 255, 0.9));
+    border-radius: 1em;
+}

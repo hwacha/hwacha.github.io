@@ -63,10 +63,11 @@
     <article>
       <p>Playtree is an application for making and listening to <em>playtrees</em>, which are like playlists, except that playback can branch, loop, and start at multiple entry points. You can try out playtree <a href="https://playtree.gdn">here</a>. In this post, I&rsquo;ll provide a broad overview of Playtree and its development.</p>
 <h2 id="at-a-glance">At a Glance</h2>
-<p>Playtree is a web application for creating custom playtrees, which are repesented like directed graphs. Playnodes represent songs to be played, and playedges represent a possible, randomly selected path for playback to follow after playback at a playnode is completed.</p>
+<p><img src="example-playtree.png" alt="alt"></p>
+<p>Playtree is a web application for creating custom playtrees, which are directed graphs. Playnodes contain songs to be played, and playedges define a path playback can follow.</p>
 <p>Key aspects of the project include:</p>
 <ul>
-<li><strong>Backend Development</strong>: A RESTful API built with Go stores created playtrees for listening or further editing, authenticates data requests via Spotify, and caches a user&rsquo;s selected playtree to load their player for future sessions.</li>
+<li><strong>Backend Development</strong>: A RESTful API built with Go stores playtrees, authenticates requests via Spotify, and caches user data, such as their currently selected playtree, for future sessions.</li>
 <li><strong>Frontend Development</strong>: A dynamic user interface developed with React and React Flow allows users to create, edit, share, and play their playtrees. Remix is used for routing and data handling. The Spotify Web Playback SDK is used for an in-app music player.</li>
 <li><strong>Deployment</strong>: The app is deployed to a Digital Ocean droplet via SSH. An Nginx reverse proxy routes requests made to the Remix and Go servers. Let&rsquo;s Encrypt was used to certify the nginx server to ensure a secure https connection.</li>
 </ul>
