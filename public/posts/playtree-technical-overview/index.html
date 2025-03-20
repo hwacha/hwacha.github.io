@@ -90,7 +90,7 @@
 <li>Custom hooks, like <code>useClickOutside</code>, are implemented to handle specific UI behaviors.</li>
 </ul>
 <h3 id="data-model">Data Model</h3>
-<p>The central component is the Playtree structure, which includes:</p>
+<p>The central data structure is the Playtree. It is created and updated by the playtree editor, stored as JSON on the server, and used by the player to dictate playback. It includes the following:</p>
 <ul>
 <li><strong>Summary</strong>: Contains metadata like ID, name, creator, and access settings.</li>
 <li><strong>Playnodes</strong>: Individual nodes in the playtree. When playback enters a playnode, its songs will be played.</li>
