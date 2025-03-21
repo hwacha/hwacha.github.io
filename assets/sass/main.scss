@@ -81,9 +81,18 @@ a:visited {
 }
 
 img {
-    width: 100%;
+    max-width: 100%;
     border: 3px solid light-dark(rgba(0, 0, 0, 0.9), rgba(255, 255, 255, 0.9));
     border-radius: 1em;
+}
+
+img[alt=small] {
+    max-width: 16em;
+    width: 100%;
+}
+img[alt=medium] {
+    max-width: 32em;
+    width: 100%;
 }
 
 code {
