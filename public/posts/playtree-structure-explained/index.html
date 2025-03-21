@@ -68,11 +68,11 @@
 <p>There&rsquo;s no doubt you&rsquo;re familiar with playlists. Let&rsquo;s take an example of one on Spotify:</p>
 <p><img src="small-talk-spotify-playlist.png" alt="small"></p>
 <p>If you play this playlist without shuffle or loop toggled on, it will start playing &ldquo;Hello.&rdquo; After &ldquo;Hello&rdquo; finishes, &ldquo;What&rsquo;s Up?&rdquo; will start playing. Then, &ldquo;I&rsquo;m Alright.&rdquo; This will carry on until &ldquo;See You Later, Alligator,&rdquo; the last song in the playlist, finishes. After that, playback stops. We can model the playlist&rsquo;s playback behavior with the following directed graph:</p>
-<p><img src="small-talk-linear-graph.png" alt="small"></p>
+<p><img src="small-talk-path-graph.png" alt="small"></p>
 <p>The songs of the playlist are contained within nodes. When playback reaches a node, the node&rsquo;s song plays.  After the song in a node is finished playing, playback moves along the directed edge to the next node.</p>
 <p>Playback starts with &ldquo;Hello,&rdquo; designated with the asterisk (*). Playback ends once &ldquo;See You Later, Alligator&rdquo; finishes: because playback has no edge to follow, playback terminates.</p>
 <p>This model of a playlist is a special kind of graph called a <a href="https://en.wikipedia.org/wiki/Path_graph"><em>path graph</em></a>, and could be implemented with a <a href="https://en.wikipedia.org/wiki/Linked_list">linked list</a> data structure. In this way, playlists are aptly named. Playback moves from the start of the list, to the next node, to the next, and so on, until it reaches the end of the list. If we were to toggle the loop button on this playlist, playback would continue from the last song, &ldquo;See You Later, Alligator,&rdquo; to the first song, &ldquo;Hello.&rdquo; Playback would look like this:</p>
-<p><img src="small-talk-cycle.png" alt="small"></p>
+<p><img src="small-talk-cycle-graph.png" alt="small"></p>
 <p>Now, we have a <a href="https://en.wikipedia.org/wiki/Cycle_graph"><em>cycle graph</em></a>, wherein playback continues indefinitely, moving from one node to the next. This could be implemented with a <a href="https://en.wikipedia.org/wiki/Linked_list#Circular_linked_list">circular linked list</a>.</p>
 <p>If we had shuffle mode toggled, we&rsquo;d end up rearranging the nodes of the list and reassigning the starting point. One possible shuffle of our original playlist looks like this:</p>
 <p><img src="small-talk-shuffled.png" alt="small"></p>
