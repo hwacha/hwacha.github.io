@@ -1,0 +1,120 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>
+      Bill Marcy
+    </title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+      <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script>
+  MathJax = {
+    tex: {
+      displayMath: [['\\[', '\\]'], ['$$', '$$']],  
+      inlineMath: [['\\(', '\\)']]                  
+    },
+    loader:{
+      load: ['ui/safe']
+    },
+  };
+</script>
+    
+    
+    
+    
+        
+        
+            <link rel="stylesheet" href="/css/main.b8c8a70cd65c989b52395751fabbf4548aac6aa932cf58267b350b61df7a343e.css" integrity="sha256-uMinDNZcmJtSOVdR&#43;rv0VIqsaqkyz1gmezULYd96ND4=" crossorigin="anonymous">
+        
+        
+    
+    
+  </head>
+  <body>
+    
+    
+  <a href="/">
+    <div class="viewport">
+      <div class="cube">
+          <div class="face front"></div>
+          <div class="face front-top"></div>
+          <div class="face top"><div style="transform: rotate(90deg); margin-top: 22%;">Home</div></div>
+          <div class="face back-top"></div>
+          <div class="face back"></div>
+          <div class="face back-bottom"></div>
+          <div class="face bottom"></div>
+          <div class="face front-bottom"></div>
+          
+          <div class="face front-right"></div>
+          <div class="face right"></div>
+          <div class="face back-right"></div>
+          
+          <div class="face back-left"></div>
+          <div class="face left"></div>
+          <div class="face front-left"></div>
+          
+          <div class="face top-right"></div>
+          
+          <div class="face bottom-right"></div>
+          
+          <div class="face bottom-left"></div>
+          
+          <div class="face top-left"></div>
+          
+          <div class="face front-top-right"></div>
+          <div class="face back-top-right"></div>
+          <div class="face back-top-left"></div>
+          <div class="face front-top-left"></div>
+          <div class="face front-bottom-right"></div>
+          <div class="face back-bottom-right"></div>
+          <div class="face back-bottom-left"></div>
+          <div class="face front-bottom-left"></div>
+      </div>
+    </div>
+  </a>
+  <section>
+    <h1>Some Nifty MacOS Terminal Commands</h1>
+    
+    <article>
+      <p>In the course of making <a href="/posts/playtree-technical-overview">Playtree</a>, I came across some esoteric terminal commands for MacOS. To start with the least useful:</p>
+<pre tabindex="0"><code>afplay &lt;audio_file&gt;
+</code></pre><p>will play a specified audio file from the command line. I used this in an early CLI prototype for Playtree, but its utility is pretty limited. There&rsquo;s no way to control audio once playback starts. You can stop playback by sending an interrupt signal with <code>CTRL-C</code>, and you can &ldquo;mute&rdquo; audio by suspending the process with <code>CTRL-Z</code>. This doesn&rsquo;t pause playback, though. It&rsquo;s still playing through silently in the background.</p>
+<p>There are few command line options, though. You can set the volume and the time to play before ending playback.You can set the playback rate, too. It&rsquo;s a fun old command buried in the OS. There&rsquo;s potential, here, to pull a prank on a friend, if only people still had audio files on hand. Maybe the <code>say</code> command, which reads the input text aloud, would suffice.</p>
+<p>Make sure to check out the <code>afinfo</code> and <code>afconvert</code> commands, which I haven&rsquo;t tried but might actually be useful!</p>
+<hr>
+<p>You probably already use the next pair of commands all the time, just not on the command line. They are <code>pbcopy</code> and <code>pbpaste</code>, available on MacOS.</p>
+<p><code>pbcopy</code> copies <code>stdin</code> to the clipboard, and <code>pbpaste</code> outputs the clipboard to <code>stdout</code>. For example:</p>
+<pre tabindex="0"><code>echo &#39;This is a sentence&#39; | pbcopy
+</code></pre><p>will copy <code>This is a sentence</code> to the clipboard. This can be useful if you need to copy the contents of a file, for instance:</p>
+<pre tabindex="0"><code>cat file.txt | pbcopy
+</code></pre><p>Similarly, you can paste the clipboard to a file:</p>
+<pre tabindex="0"><code>pbpaste &gt; new_file.txt
+</code></pre><pre tabindex="0"><code>pbpaste &gt;&gt; file_to_append_to.txt
+</code></pre><p>I found these commands pretty useful when I needed to interface between my browser and my terminal. The easiest way to get text from the browser is to copy it, and often the easiest way to interact with the local filesystem is via the command line.</p>
+<p>Another feature of <code>pbcopy</code> and <code>pbpaste</code> is that you can target one of four clipboards with the <code>-pboard</code> flag. I didn&rsquo;t end up using this feature very often, since I was almost always using these commands in conjunction with normal copy and paste, but maybe you can make good use of it.</p>
+<hr>
+<p>The last tidbit is a misnomer on two counts—it isn&rsquo;t exclusive to MacOS, and the takeaway isn&rsquo;t about the command itself! The command is <code>less</code>. You can use <code>less</code> to make terminal output more human readable. It&rsquo;ll take an input stream and display only a fraction of the stream at a time. You can move within the stream using the arrow keys and by entering commands.</p>
+<p>You may already know about <code>less</code>. What you may not know is that <code>less</code> outputs the stream it&rsquo;s reading to <code>stdout</code>! This means that you can do something like</p>
+<pre tabindex="0"><code>echo &#34;This is some text to read&#34; | less | cat
+</code></pre><p>and, instead of seeing the text in <code>less</code>, it will just be printed to the terminal.</p>
+<p>Why would you ever want to do that? Isn&rsquo;t it redundant? The main benefit is that <em>other</em> commands may utilize <code>less</code> to display their output. <code>git diff</code> works this way. While working on Playtree, I&rsquo;d often pepper the code with <code>debugger</code> and <code>console.log</code> statements. Before committing my code, I&rsquo;d check the diff to see if I&rsquo;d left any stragglers around. I realized you can just pipe <code>git diff</code> to <code>grep</code>, and it was much faster than sifting through the diff in <code>less</code>:</p>
+<pre tabindex="0"><code>git diff | grep console.log
+</code></pre><p>You can even pipe the output of <code>grep</code> <em>back</em> to <code>less</code>:</p>
+<pre tabindex="0"><code>git diff | grep console.log | less
+</code></pre><p>This made it much easier to sift through diffs if I needed to. Granted, there&rsquo;s a lot I&rsquo;ve yet to learn about how to move around a file quickly in <code>less</code> itself. I&rsquo;ll probably get to that when I get around to vim.</p>
+<hr>
+<p>That&rsquo;s all I&rsquo;ve got for now. Check out <a href="https://ss64.com/mac/">this reference</a> for other available MacOS commands. This index is where I found out about the ones I shared with you.</p>
+
+    </article>
+    <aside>
+      
+    </aside>
+  </section>
+
+    
+    
+    
+  </body>
+</html>

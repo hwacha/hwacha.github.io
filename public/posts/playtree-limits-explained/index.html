@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>
+      Bill Marcy
+    </title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+      <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script>
+  MathJax = {
+    tex: {
+      displayMath: [['\\[', '\\]'], ['$$', '$$']],  
+      inlineMath: [['\\(', '\\)']]                  
+    },
+    loader:{
+      load: ['ui/safe']
+    },
+  };
+</script>
+    
+    
+    
+    
+        
+        
+            <link rel="stylesheet" href="/css/main.b8c8a70cd65c989b52395751fabbf4548aac6aa932cf58267b350b61df7a343e.css" integrity="sha256-uMinDNZcmJtSOVdR&#43;rv0VIqsaqkyz1gmezULYd96ND4=" crossorigin="anonymous">
+        
+        
+    
+    
+  </head>
+  <body>
+    
+    
+  <a href="/">
+    <div class="viewport">
+      <div class="cube">
+          <div class="face front"></div>
+          <div class="face front-top"></div>
+          <div class="face top"><div style="transform: rotate(90deg); margin-top: 22%;">Home</div></div>
+          <div class="face back-top"></div>
+          <div class="face back"></div>
+          <div class="face back-bottom"></div>
+          <div class="face bottom"></div>
+          <div class="face front-bottom"></div>
+          
+          <div class="face front-right"></div>
+          <div class="face right"></div>
+          <div class="face back-right"></div>
+          
+          <div class="face back-left"></div>
+          <div class="face left"></div>
+          <div class="face front-left"></div>
+          
+          <div class="face top-right"></div>
+          
+          <div class="face bottom-right"></div>
+          
+          <div class="face bottom-left"></div>
+          
+          <div class="face top-left"></div>
+          
+          <div class="face front-top-right"></div>
+          <div class="face back-top-right"></div>
+          <div class="face back-top-left"></div>
+          <div class="face front-top-left"></div>
+          <div class="face front-bottom-right"></div>
+          <div class="face back-bottom-right"></div>
+          <div class="face back-bottom-left"></div>
+          <div class="face front-bottom-left"></div>
+      </div>
+    </div>
+  </a>
+  <section>
+    <h1>Playtree Limits Explained</h1>
+    
+    <article>
+      <p>In this post, I&rsquo;ll explain how limits work in Playtree.</p>
+<h3 id="limiting-playedges">Limiting Playedges</h3>
+<p><img src="three-birds-no-limit.png" alt="medium"></p>
+<p>This playtree will start at &ldquo;Three Little Birds,&rdquo; play one of &ldquo;Blackbird,&rdquo; &ldquo;Free Bird,&rdquo; or &ldquo;Surfin&rsquo; Bird,&rdquo; play &ldquo;No Birds,&rdquo; and then repeat forever. In case you&rsquo;re not familiar with these tunes, &ldquo;Free Bird&rdquo; is over 9 minutes long, and &ldquo;Surfin&rsquo; Bird&rdquo; is best enjoyed in moderation. You might want to set a limit on how many times those songs can be selected.</p>
+<p>Let&rsquo;s put some limits on our playtree:</p>
+<p><img src="three-birds-with-limit.png" alt="medium"></p>
+<p>Now, the playedge to &ldquo;Free Bird&rdquo; can only be chosen once. The next time &ldquo;Three Little Birds&rdquo; finishes playing, that edge will not be considered in the selection process. One of the two remaining edges will be selected. &ldquo;Surfin&rsquo; Bird&rdquo; can be chosen three times, after which it will be removed from consideration. After &ldquo;Free Bird&rdquo; plays once and &ldquo;Surfin&rsquo; Bird&rdquo; plays three times, &ldquo;Blackbird&rdquo; will always play after &ldquo;Three Little Birds.&rdquo;</p>
+<p>Suppose you&rsquo;ve had your fill even of the beautifully simple &ldquo;Blackbird.&rdquo; You set the edge leading into it to 5:</p>
+<p><img src="three-birds-with-limit-blackbird.png" alt="medium"></p>
+<p>Now, each of &ldquo;Three Little Bird&rdquo;&rsquo;s outgoing playedges are limited. After it plays enough times, none of its outgoing edges will be eligible for selection. When this happens, the node is treated as though it has no outgoing edges, and playback terminates.</p>
+<hr>
+<h3 id="limiting-playnodes">Limiting Playnodes</h3>
+<p><img src="wish-you-were-here-cycle.png" alt="small"></p>
+<p>The songs that bookend this fantastic album are 12+ minutes each! You might want to hear them once while leaving the other songs on loop. But, if we limit their incoming playedges, then &ldquo;Shine On You Crazy Diamond (Pts. 1-5)&rdquo; will play twice, and playback will terminate after &ldquo;Wish You Were Here&rdquo; is played a second time. Instead, we can set a limit on the <em>playnodes</em>. Playback will still follow edges coming in and out of a limited playnode, but playback will pass through without playing the song the playnode contains:</p>
+<p><img src="wish-you-were-here-with-limit.png" alt="small"></p>
+<p>In this playtree, all songs will play through once, and then on the second pass, playback will skip &ldquo;Shine On You Crazy Diamond (Pts. 1-5)&rdquo; and pass through to &ldquo;Welcome to the Machine.&rdquo; After &ldquo;Wish You Were Here&rdquo; finishes a second time, playback will pass through both Crazy Diamonds and on to &ldquo;Welcome to the Machine&rdquo; again.</p>
+<p>Playback iteratively passes through limited nodes until it finds something to play. It&rsquo;s possible to make a playtree that infinitely cycles through nodes that are all limited. In such a scenario, playback will try to find a node up to a maximum number of iterations (currently set to 10,000), at which point playback will terminate as a failsafe.</p>
+
+    </article>
+    <aside>
+      
+    </aside>
+  </section>
+
+    
+    
+    
+  </body>
+</html>
