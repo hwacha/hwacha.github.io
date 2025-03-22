@@ -7,6 +7,9 @@
       {{ .Site.Title }}
     {{ end }}</title>
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    {{ if .Param "math" }}
+      {{ partialCached "math.html" . }}
+    {{ end }}
     {{ with resources.Get "sass/main.scss" }}
     {{ $opts := dict
         "enableSourceMap" (not hugo.IsProduction)

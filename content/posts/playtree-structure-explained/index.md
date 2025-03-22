@@ -4,7 +4,7 @@ draft = true
 title = 'Playtree Structure Explained'
 +++
 
-In this article, I'll explain what a playtree structure is, and discuss some of the extra features added to my implementation of playtrees. A basic familiarity with sequences and cycles, trees, graphs, and linked lists is assumed.
+In this article, I'll explain what a playtree structure is. A basic familiarity with sequences and cycles, trees, graphs, and linked lists is assumed.
 
 There's no doubt you're familiar with playlists. Let's take an example of one on Spotify:
 
@@ -49,6 +49,8 @@ Notice how multiple nodes can pass playback on to the same node, e.g. "Thank U" 
 (Technically, cycles were possible even when we lifted the first constraint on outgoing edges. The "root" node of the tree had no incoming nodes, so it, like a cycle graph, could have admissibly been given an incoming edge from one of the "leaf" nodes with no outgoing edges. But only one such cycle was allowed under that set of constraints, and now any number of cycles can occur, anywhere within the graph.)
 
 Now, at this point, by analogy with playlists and playtrees, I should call these structures *playgraphs*. But I still call them playtrees, even though playtrees aren't always trees. Playtree just has a certain ring to it.
+
+Officially, the nodes of a playtree are "playnodes" and the edges of a playtree are "playedges." I'll still use the terms "nodes" and "edges" interchangeably with "playnodes" and "playedges" but I will try to be strict when there might be ambiguity.
 
 Each of our examples so far have made an implicit assumption. There has been at least one node in our graphs that can reach every other node. We've designated one of these nodes as the "start" node with an asterisk. This is a sensible assumption: after all, playback has to start *somewhere*, and if we add a song to our graph, we probably want there to be at least *some* chance for it to be played, some chance that playback finds its way to it.
 

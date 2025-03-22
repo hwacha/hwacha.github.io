@@ -63,4 +63,4 @@ This made it much easier to sift through diffs if I needed to. Granted, there's 
 
 ---
 
-That's all I've got for now. Check out [this reference](https://ss64.com/mac/) for other available MacOS commands. This index is where I found out about a lot of these commands.
+That's all I've got for now. Check out [this reference](https://ss64.com/mac/) for other available MacOS commands. This index is where I found out about the ones I shared with you.

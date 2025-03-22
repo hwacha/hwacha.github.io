@@ -53,7 +53,7 @@ To ensure data integrity, I've implemented server-side syntax validation using a
 ## Challenges and Solutions
 
 ### UI for the Playtree editor
-I used React Flow to implement an interactive graph editor. Synchronizing the UI state with the playtree data took a careful approach and a deep understanding of React's resolution algorithm.
+I used React Flow to implement an interactive graph editor. Synchronizing the UI state with the playtree data took a careful approach and a deep understanding of React's reconciliation algorithm.
 
 See [this post](/posts/playtree-editor-ui) for more.
 
