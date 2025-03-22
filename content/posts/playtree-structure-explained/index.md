@@ -28,15 +28,15 @@ If we had shuffle mode toggled, we'd end up rearranging the nodes of the list an
 
 ![small](small-talk-shuffled.png)
 
-Let's think about these path and cycle graphs in terms of their essential constraints. Every node must have exactly one edge going out, except the last node, which has none, if loop mode is toggled off. And every node must have exactly one edge coming in, except the starting node, which has none, if loop mode is toggled off. And no node can have a [*loop*](https://en.wikipedia.org/wiki/Loop_(graph_theory)): an edge that connects from a node to itself. What if we lifted these constraints? What kind of playback behavior could follow from that?
+Let's think about these path and cycle graphs in terms of their essential constraints. Every node must have exactly one edge going out, except the last node, which has none, if loop mode is toggled off. And every node must have exactly one edge coming in, except the starting node, which has none, if loop mode is toggled off. And no node can have a [*loop*](https://en.wikipedia.org/wiki/Loop_(graph_theory)): an edge that connects from a node to itself (except for one-song playlists with loop-mode toggled on). What if we lifted these constraints? What kind of playback behavior could follow from that?
 
 Let's start by allowing every node to have any number of edges going out. Then, we could make tree structures like this:
 
 ![medium](small-talk-tree.png)
 
-How will playback progress once it finishes at a node with multiple outgoing edges? There isn't only one way to define its behavior. We could have it that playback "splits" and plays both of the next nodes at the same time. But as I've defined it, playback progresses by randomly selecting one of the edges to follow.
+How will playback progress once it finishes at a node with multiple outgoing edges? There are lots of ways we could define its behavior. We could have it so playback "splits" and plays both of the next nodes at the same time. But as I've defined it, playback progresses by randomly selecting one of the edges to follow.
 
-In this example, playback starts at "Hello." After "Hello" finishes, playback randomly selects an edge to follow, and may end up at either "What's Up?" or "Hello, Goodbye". If "Hello, Goodbye" is chosen, the node has no outgoing edges, and so playback ends after the song finishes. Let's suppose instead that "What's Up?" is selected. Playback moves to "What's Up?" and, after it's done playing, either of "I'm Alright" or "I'm So Tired" is selected at random. Suppose "I'm Alright" is chosen. Because there is only one outgoing edge, playback automatically moves to "Happy For You." After it plays, one song among "See You Later, Alligator," "Thank U," and "Yeah!" is selected, it plays, and then playback ends.
+In this example, playback starts at "Hello." After "Hello" finishes, playback randomly selects an edge to follow, and may end up at either "What's Up?" or "Hello, Goodbye." If "Hello, Goodbye" is chosen, the node has no outgoing edges, and so playback ends after the song finishes. Let's suppose instead that "What's Up?" is selected. Playback moves to "What's Up?" and, after it's done playing, either of "I'm Alright" or "I'm So Tired" is selected at random. Suppose "I'm Alright" is chosen. Because there is only one outgoing edge, playback automatically moves to "Happy For You." After it plays, one song among "See You Later, Alligator," "Thank U," and "Yeah!" is selected, it plays, and then playback ends.
 
 Notice that this kind of branching behavior, where playback branches randomly but with a consistent structure, cannot be replicated with a playlist, even with shuffle. In a playlist, you either move along in the predefined order, or else you play every song in the playlist in a totally random order. This new kind of playback structure merits its own name beyond a play*list*—let's call it a **playtree**!
 
@@ -44,7 +44,7 @@ We can go further and lift another constraint. We can allow every node to have a
 
 ![medium](small-talk-graph.png)
 
-Notice how multiple nodes can pass playback on to the same node, e.g. "Thank U" and "Sorry" to "No Problem." Also, cycles are now allowed: "Yeah!" passes playback back to itself, looping the song indefinitely once it is reached. The first song moves to "Wake Me Up", which might go back to "I'm Only Sleeping" or else progress to "I'm Awake Now."
+Notice how multiple nodes can pass playback on to the same node, e.g. "Thank U" and "Sorry" to "No Problem." Also, cycles are now allowed: "Yeah!" passes playback back to itself, looping the song indefinitely once it is reached. The first song moves to "Wake Me Up," which might go back to "I'm Only Sleeping" or else progress to "I'm Awake Now."
 
 (Technically, cycles were possible even when we lifted the first constraint on outgoing edges. The "root" node of the tree had no incoming nodes, so it, like a cycle graph, could have admissibly been given an incoming edge from one of the "leaf" nodes with no outgoing edges. But only one such cycle was allowed under that set of constraints, and now any number of cycles can occur, anywhere within the graph.)
 
