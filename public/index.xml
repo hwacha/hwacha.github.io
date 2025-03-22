@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Bill Marcy</title>
-    <link>https://example.org/posts/</link>
-    <description>Recent content in Posts on Bill Marcy</description>
+    <title>Home on Bill Marcy</title>
+    <link>https://example.org/</link>
+    <description>Recent content in Home on Bill Marcy</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 20 Mar 2025 12:28:54 -0700</lastBuildDate>
-    <atom:link href="https://example.org/posts/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://example.org/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Playtree Structure Explained</title>
       <link>https://example.org/posts/playtree-structure-explained/</link>

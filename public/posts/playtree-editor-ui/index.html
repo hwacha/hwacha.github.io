@@ -1,0 +1,80 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>
+      Bill Marcy
+    </title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    
+    
+        
+        
+            <link rel="stylesheet" href="/css/main.b8c8a70cd65c989b52395751fabbf4548aac6aa932cf58267b350b61df7a343e.css" integrity="sha256-uMinDNZcmJtSOVdR&#43;rv0VIqsaqkyz1gmezULYd96ND4=" crossorigin="anonymous">
+        
+        
+    
+    
+  </head>
+  <body>
+    
+    
+  <a href="/">
+    <div class="viewport">
+      <div class="cube">
+          <div class="face front"></div>
+          <div class="face front-top"></div>
+          <div class="face top"><div style="transform: rotate(90deg); margin-top: 22%;">Home</div></div>
+          <div class="face back-top"></div>
+          <div class="face back"></div>
+          <div class="face back-bottom"></div>
+          <div class="face bottom"></div>
+          <div class="face front-bottom"></div>
+          
+          <div class="face front-right"></div>
+          <div class="face right"></div>
+          <div class="face back-right"></div>
+          
+          <div class="face back-left"></div>
+          <div class="face left"></div>
+          <div class="face front-left"></div>
+          
+          <div class="face top-right"></div>
+          
+          <div class="face bottom-right"></div>
+          
+          <div class="face bottom-left"></div>
+          
+          <div class="face top-left"></div>
+          
+          <div class="face front-top-right"></div>
+          <div class="face back-top-right"></div>
+          <div class="face back-top-left"></div>
+          <div class="face front-top-left"></div>
+          <div class="face front-bottom-right"></div>
+          <div class="face back-bottom-right"></div>
+          <div class="face back-bottom-left"></div>
+          <div class="face front-bottom-left"></div>
+      </div>
+    </div>
+  </a>
+  <section>
+    <h1>Playtree Editor UI</h1>
+    
+    <article>
+      <p>I wanted to create an intuitive, fun UI for making and visualizing complex playtrees. Playtrees are graph structures, so I used <a href="https://reactflow.dev/">React Flow</a>, a library for rendering and interacting with graphs. The editor displays highly customized nodes and edges using React Flow. At the same time, I wanted to keep the playtree data structure, as maintained on the server, as the editor&rsquo;s source of truth. Keeping the React Flow UI synced with the playtree data required a nuanced understanding of React&rsquo;s resolution algorithm: if React cannot determine that a node remains the same from one render to another, for example, it will destroy the underlying HTML and recreate it for the next render. This isn&rsquo;t only a performance issue; in some cases, it will lead to critical UI bugs like losing focus on a text input while typing. I carefully syncronized the central playtree state with the React Flow UI state to ensure a clean data flow while avoiding any UI bugs.</p>
+<p>Although many of the rules governing valid playtrees are implicitly enforced by the editor UI, there are some features which must be checked before a playtree is saved. I perform client-side validation before a playtree is saved, which issues warnings to a user when their playtree doesn&rsquo;t have a playroot attached (meaning playback won&rsquo;t start anywhere if they try to play). This playtree is considered valid—it doesn&rsquo;t violate any playtree rules—but the editor still issues a warning on save, as the user most likely didn&rsquo;t intend to make a playtree that doesn&rsquo;t start playback anywhere. The editor also checks if a user&rsquo;s playscopes are valid. Playscopes can&rsquo;t partially overlap other playscopes, or be redundant. A playtree with invalid playscopes can&rsquo;t unambiguously apply scope rules, and so it is invalid as a playtree. When the user tries to save a invalid playtree, an error is reported in the editor and saving is prevented.</p>
+
+    </article>
+    <aside>
+      
+    </aside>
+  </section>
+
+    
+    
+    
+  </body>
+</html>

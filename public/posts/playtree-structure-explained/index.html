@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>
+      Bill Marcy
+    </title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    
+    
+        
+        
+            <link rel="stylesheet" href="/css/main.b8c8a70cd65c989b52395751fabbf4548aac6aa932cf58267b350b61df7a343e.css" integrity="sha256-uMinDNZcmJtSOVdR&#43;rv0VIqsaqkyz1gmezULYd96ND4=" crossorigin="anonymous">
+        
+        
+    
+    
+  </head>
+  <body>
+    
+    
+  <a href="/">
+    <div class="viewport">
+      <div class="cube">
+          <div class="face front"></div>
+          <div class="face front-top"></div>
+          <div class="face top"><div style="transform: rotate(90deg); margin-top: 22%;">Home</div></div>
+          <div class="face back-top"></div>
+          <div class="face back"></div>
+          <div class="face back-bottom"></div>
+          <div class="face bottom"></div>
+          <div class="face front-bottom"></div>
+          
+          <div class="face front-right"></div>
+          <div class="face right"></div>
+          <div class="face back-right"></div>
+          
+          <div class="face back-left"></div>
+          <div class="face left"></div>
+          <div class="face front-left"></div>
+          
+          <div class="face top-right"></div>
+          
+          <div class="face bottom-right"></div>
+          
+          <div class="face bottom-left"></div>
+          
+          <div class="face top-left"></div>
+          
+          <div class="face front-top-right"></div>
+          <div class="face back-top-right"></div>
+          <div class="face back-top-left"></div>
+          <div class="face front-top-left"></div>
+          <div class="face front-bottom-right"></div>
+          <div class="face back-bottom-right"></div>
+          <div class="face back-bottom-left"></div>
+          <div class="face front-bottom-left"></div>
+      </div>
+    </div>
+  </a>
+  <section>
+    <h1>Playtree Structure Explained</h1>
+    
+    <article>
+      <p>In this article, I&rsquo;ll explain what a playtree structure is, and discuss some of the extra features added to my implementation of playtrees. A basic familiarity with sequences and cycles, trees, graphs, and linked lists is assumed.</p>
+<p>There&rsquo;s no doubt you&rsquo;re familiar with playlists. Let&rsquo;s take an example of one on Spotify:</p>
+<p><img src="small-talk-spotify-playlist.png" alt="small"></p>
+<p>If you play this playlist without shuffle or loop toggled on, it will start playing &ldquo;Hello.&rdquo; After &ldquo;Hello&rdquo; finishes, &ldquo;What&rsquo;s Up?&rdquo; will start playing. Then, &ldquo;I&rsquo;m Alright.&rdquo; This will carry on until &ldquo;See You Later, Alligator,&rdquo; the last song in the playlist, finishes. After that, playback stops. We can model the playlist&rsquo;s playback behavior with the following directed graph:</p>
+<p><img src="small-talk-path-graph.png" alt="small"></p>
+<p>The songs of the playlist are contained within nodes. When playback reaches a node, the node&rsquo;s song plays.  After the song in a node is finished playing, playback moves along the directed edge to the next node.</p>
+<p>Playback starts with &ldquo;Hello,&rdquo; designated with the asterisk (*). Playback ends once &ldquo;See You Later, Alligator&rdquo; finishes: because playback has no edge to follow, playback terminates.</p>
+<p>This model of a playlist is a special kind of graph called a <a href="https://en.wikipedia.org/wiki/Path_graph"><em>path graph</em></a>, and could be implemented with a <a href="https://en.wikipedia.org/wiki/Linked_list">linked list</a> data structure. In this way, playlists are aptly named. Playback moves from the start of the list, to the next node, to the next, and so on, until it reaches the end of the list. If we were to toggle the loop button on this playlist, playback would continue from the last song, &ldquo;See You Later, Alligator,&rdquo; to the first song, &ldquo;Hello.&rdquo; Playback would look like this:</p>
+<p><img src="small-talk-cycle-graph.png" alt="small"></p>
+<p>Now, we have a <a href="https://en.wikipedia.org/wiki/Cycle_graph"><em>cycle graph</em></a>, wherein playback continues indefinitely, moving from one node to the next. This could be implemented with a <a href="https://en.wikipedia.org/wiki/Linked_list#Circular_linked_list">circular linked list</a>.</p>
+<p>If we had shuffle mode toggled, we&rsquo;d end up rearranging the nodes of the list and reassigning the starting point. One possible shuffle of our original playlist looks like this:</p>
+<p><img src="small-talk-shuffled.png" alt="small"></p>
+<p>Let&rsquo;s think about these path and cycle graphs in terms of their essential constraints. Every node must have exactly one edge going out, except the last node, which has none, if loop mode is toggled off. And every node must have exactly one edge coming in, except the starting node, which has none, if loop mode is toggled off. And no node can have a <a href="https://en.wikipedia.org/wiki/Loop_(graph_theory)"><em>loop</em></a>: an edge that connects from a node to itself. What if we lifted these constraints? What kind of playback behavior could follow from that?</p>
+<p>Let&rsquo;s start by allowing every node to have any number of edges going out. Then, we could make tree structures like this:</p>
+<p><img src="small-talk-tree.png" alt="medium"></p>
+<p>How will playback progress once it finishes at a node with multiple outgoing edges? There isn&rsquo;t only one way to define its behavior. We could have it that playback &ldquo;splits&rdquo; and plays both of the next nodes at the same time. But as I&rsquo;ve defined it, playback progresses by randomly selecting one of the edges to follow.</p>
+<p>In this example, playback starts at &ldquo;Hello.&rdquo; After &ldquo;Hello&rdquo; finishes, playback randomly selects an edge to follow, and may end up at either &ldquo;What&rsquo;s Up?&rdquo; or &ldquo;Hello, Goodbye&rdquo;. If &ldquo;Hello, Goodbye&rdquo; is chosen, the node has no outgoing edges, and so playback ends after the song finishes. Let&rsquo;s suppose instead that &ldquo;What&rsquo;s Up?&rdquo; is selected. Playback moves to &ldquo;What&rsquo;s Up?&rdquo; and, after it&rsquo;s done playing, either of &ldquo;I&rsquo;m Alright&rdquo; or &ldquo;I&rsquo;m So Tired&rdquo; is selected at random. Suppose &ldquo;I&rsquo;m Alright&rdquo; is chosen. Because there is only one outgoing edge, playback automatically moves to &ldquo;Happy For You.&rdquo; After it plays, one song among &ldquo;See You Later, Alligator,&rdquo; &ldquo;Thank U,&rdquo; and &ldquo;Yeah!&rdquo; is selected, it plays, and then playback ends.</p>
+<p>Notice that this kind of branching behavior, where playback branches randomly but with a consistent structure, cannot be replicated with a playlist, even with shuffle. In a playlist, you either move along in the predefined order, or else you play every song in the playlist in a totally random order. This new kind of playback structure merits its own name beyond a play<em>list</em>—let&rsquo;s call it a <strong>playtree</strong>!</p>
+<p>We can go further and lift another constraint. We can allow every node to have any number of edges coming in. Also, let&rsquo;s allow loops (self-connecting edges). Here&rsquo;s an example graph structure made possible with those constraints lifted:</p>
+<p><img src="small-talk-graph.png" alt="medium"></p>
+<p>Notice how multiple nodes can pass playback on to the same node, e.g. &ldquo;Thank U&rdquo; and &ldquo;Sorry&rdquo; to &ldquo;No Problem.&rdquo; Also, cycles are now allowed: &ldquo;Yeah!&rdquo; passes playback back to itself, looping the song indefinitely once it is reached. The first song moves to &ldquo;Wake Me Up&rdquo;, which might go back to &ldquo;I&rsquo;m Only Sleeping&rdquo; or else progress to &ldquo;I&rsquo;m Awake Now.&rdquo;</p>
+<p>(Technically, cycles were possible even when we lifted the first constraint on outgoing edges. The &ldquo;root&rdquo; node of the tree had no incoming nodes, so it, like a cycle graph, could have admissibly been given an incoming edge from one of the &ldquo;leaf&rdquo; nodes with no outgoing edges. But only one such cycle was allowed under that set of constraints, and now any number of cycles can occur, anywhere within the graph.)</p>
+<p>Now, at this point, by analogy with playlists and playtrees, I should call these structures <em>playgraphs</em>. But I still call them playtrees, even though playtrees aren&rsquo;t always trees. Playtree just has a certain ring to it.</p>
+<p>Each of our examples so far have made an implicit assumption. There has been at least one node in our graphs that can reach every other node. We&rsquo;ve designated one of these nodes as the &ldquo;start&rdquo; node with an asterisk. This is a sensible assumption: after all, playback has to start <em>somewhere</em>, and if we add a song to our graph, we probably want there to be at least <em>some</em> chance for it to be played, some chance that playback finds its way to it.</p>
+<p>But what if we ignored even <em>this</em> assumption? Our graphs could look like &ldquo;islands&rdquo; instead. But, keep in mind that we want to make sure the nodes we put into the graph have a chance at being played. So, we allow for multiple starting points:</p>
+<p><img src="small-talk-islands.png" alt="medium"></p>
+<p>How exactly does having multiple starting points affect playback behavior? Again, it&rsquo;s partly a matter of stipulation. In Playtree, starting points (called &ldquo;playroots&rdquo;) can be assigned to any number of nodes, and they are given an index. When a user first plays a playtree, a playhead is created for each playroot. A playhead manages a playback context independent from every other playhead. Playheads are ordered according to the playroot index, and each playhead starts at the node a playroot was assigned to. When playback in a playhead reaches a stopping point, the playhead is reset, and playback is automatically passed to the next playhead by index. The user can also move between playheads with their Playtree controls. Think of it like switching between car CDs.</p>
+<p>In this case, let&rsquo;s suppose that the playroot assigned to &ldquo;Telephone&rdquo; has index 0, and the playroot assigned to &ldquo;Cars&rdquo; has index 1. When a user plays this playtree, playback will start at &ldquo;Telephone,&rdquo; end at &ldquo;Call Me,&rdquo; reset, and then pass playback on to the playhead starting at &ldquo;Cars.&rdquo; After &ldquo;Get Outta My Dreams, Get Into My Car&rdquo; finishes, the playhead resets and passes playback on to the playhead at &ldquo;Telephone.&rdquo; Because this playhead has already played through and stopped, playback is stopped until the user decides to start playback again.</p>
+<p>Usually, your playtrees end up such that every node is reachable by exactly one playroot. But that&rsquo;s not enforced by Playtree. Consider the following playtree:</p>
+<p><img src="islands-odd-playroots.png" alt="medium"></p>
+<p>This playtree is valid, even though it has an arguably redundant playroot assigned to &ldquo;Call Me,&rdquo; and even though &ldquo;Cars&rdquo; and &ldquo;Mustang Sally&rdquo; are not reachable from any playroot. A user editing a playtree will be warned if a node isn&rsquo;t reachable, as this might be a mistake, but the playtree is still valid nonetheless.</p>
+
+    </article>
+    <aside>
+      
+    </aside>
+  </section>
+
+    
+    
+    
+  </body>
+</html>

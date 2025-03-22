@@ -12,7 +12,7 @@ There's no doubt you're familiar with playlists. Let's take an example of one on
 
 If you play this playlist without shuffle or loop toggled on, it will start playing "Hello." After "Hello" finishes, "What's Up?" will start playing. Then, "I'm Alright." This will carry on until "See You Later, Alligator," the last song in the playlist, finishes. After that, playback stops. We can model the playlist's playback behavior with the following directed graph:
 
-![small](small-talk-linear-graph.png)
+![small](small-talk-path-graph.png)
 
 The songs of the playlist are contained within nodes. When playback reaches a node, the node's song plays.  After the song in a node is finished playing, playback moves along the directed edge to the next node.
 
@@ -20,7 +20,7 @@ Playback starts with "Hello," designated with the asterisk (*). Playback ends on
 
 This model of a playlist is a special kind of graph called a [*path graph*](https://en.wikipedia.org/wiki/Path_graph), and could be implemented with a [linked list](https://en.wikipedia.org/wiki/Linked_list) data structure. In this way, playlists are aptly named. Playback moves from the start of the list, to the next node, to the next, and so on, until it reaches the end of the list. If we were to toggle the loop button on this playlist, playback would continue from the last song, "See You Later, Alligator," to the first song, "Hello." Playback would look like this:
 
-![small](small-talk-cycle.png)
+![small](small-talk-cycle-graph.png)
 
 Now, we have a [*cycle graph*](https://en.wikipedia.org/wiki/Cycle_graph), wherein playback continues indefinitely, moving from one node to the next. This could be implemented with a [circular linked list](https://en.wikipedia.org/wiki/Linked_list#Circular_linked_list).
 
