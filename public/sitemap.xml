@@ -2,10 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://hwacha.github.io/posts/playtree-shares-and-priority-explained/</loc>
-    <lastmod>2025-03-21T22:10:46-07:00</lastmod>
+    <loc>https://hwacha.github.io/posts/playtree-playscopes-explained/</loc>
+    <lastmod>2025-03-22T19:34:08-07:00</lastmod>
   </url><url>
     <loc>https://hwacha.github.io/posts/</loc>
+    <lastmod>2025-03-22T19:34:08-07:00</lastmod>
+  </url><url>
+    <loc>https://hwacha.github.io/posts/playtree-playnode-types-explained/</loc>
+    <lastmod>2025-03-22T14:52:03-07:00</lastmod>
+  </url><url>
+    <loc>https://hwacha.github.io/posts/playtree-shares-and-priority-explained/</loc>
     <lastmod>2025-03-21T22:10:46-07:00</lastmod>
   </url><url>
     <loc>https://hwacha.github.io/posts/playtree-limits-explained/</loc>

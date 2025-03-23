@@ -1,0 +1,122 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>
+      Bill Marcy
+    </title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+      <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script>
+  MathJax = {
+    tex: {
+      displayMath: [['\\[', '\\]'], ['$$', '$$']],  
+      inlineMath: [['\\(', '\\)']]                  
+    },
+    loader:{
+      load: ['ui/safe']
+    },
+  };
+</script>
+    
+    
+    
+    
+        
+        
+            <link rel="stylesheet" href="/css/main.b8c8a70cd65c989b52395751fabbf4548aac6aa932cf58267b350b61df7a343e.css" integrity="sha256-uMinDNZcmJtSOVdR&#43;rv0VIqsaqkyz1gmezULYd96ND4=" crossorigin="anonymous">
+        
+        
+    
+    
+  </head>
+  <body>
+    
+    
+  <a href="/">
+    <div class="viewport">
+      <div class="cube">
+          <div class="face front"></div>
+          <div class="face front-top"></div>
+          <div class="face top"><div style="transform: rotate(90deg); margin-top: 22%;">Home</div></div>
+          <div class="face back-top"></div>
+          <div class="face back"></div>
+          <div class="face back-bottom"></div>
+          <div class="face bottom"></div>
+          <div class="face front-bottom"></div>
+          
+          <div class="face front-right"></div>
+          <div class="face right"></div>
+          <div class="face back-right"></div>
+          
+          <div class="face back-left"></div>
+          <div class="face left"></div>
+          <div class="face front-left"></div>
+          
+          <div class="face top-right"></div>
+          
+          <div class="face bottom-right"></div>
+          
+          <div class="face bottom-left"></div>
+          
+          <div class="face top-left"></div>
+          
+          <div class="face front-top-right"></div>
+          <div class="face back-top-right"></div>
+          <div class="face back-top-left"></div>
+          <div class="face front-top-left"></div>
+          <div class="face front-bottom-right"></div>
+          <div class="face back-bottom-right"></div>
+          <div class="face back-bottom-left"></div>
+          <div class="face front-bottom-left"></div>
+      </div>
+    </div>
+  </a>
+  <section>
+    <h1>Playtree Playscopes Explained</h1>
+    
+    <article>
+      <h3 id="shuffle">Shuffle</h3>
+<p>You can make a shuffle playlist in Playtree with a selector:</p>
+<p><img src="90s-shuffle.png" alt="medium"></p>
+<p>Each song is limited to one play, and the node is set to repeat five times. This means the selector will play all five songs in a random order, just like a shuffle playlist.</p>
+<p>But, by default, the counters that manage limiting plays during playback are <em>global</em>: if you go back to this playnode later, all of the songs will still be limited.</p>
+<h3 id="playscopes">Playscopes</h3>
+<p>If you want to run through a shuffle again, you&rsquo;ll want to use a <em>playscope</em>. A playscope defines a subregion of the playtree where play counters are contained. Any counters keeping track of playnodes, playedges, or songs are reset once playback exits the playscope the counters fall within.</p>
+<p>Let&rsquo;s update our shuffle so it can shuffle more than once:</p>
+<p><img src="90s-shuffle-with-reset.png" alt="medium"></p>
+<p>The blue box around &ldquo;90s Alphabet Shuffle&rdquo; is a playscope. The &ldquo;Reset&rdquo; playnode has no songs: it exists to allow playback to exit the blue scope, resetting the play counters on the shuffle songs. Letting this play through will shuffle the five songs, shuffle the five songs again in a different order, and so on, indefinitely.</p>
+<p>Playscopes can apply to multiple playnodes. Let&rsquo;s add another shuffle playnode:</p>
+<p><img src="70s-shuffle.png" alt="medium"></p>
+<p>and make a &ldquo;zipper shuffle&rdquo; out of these two playlists: randomly play one song from the 90s playlist, then randomly play one song from the 70s playlist, then choose a different song from the 90s playlist, then choose a different song from the 70s playlist, etc.</p>
+<p><img src="zipper-shuffle.png" alt="small"></p>
+<p>Playback cycles between the two selectors five times, all the while staying in the blue playscope. Then, the playedge from &ldquo;70s&hellip;&rdquo; to &ldquo;90s&rdquo; is limited, and the playedge to &ldquo;Reset&rdquo; is followed. The &ldquo;Reset&rdquo; playnode is not in the blue playscope, and so all of the counters in the blue playscope are reset to <code>0</code>. This includes the playedge that was limited to <code>4</code>. Playback passes through the empty &ldquo;Reset&rdquo; playnode to &ldquo;90s&hellip;,&rdquo; which starts the zipper shuffle all over again.</p>
+<hr>
+<h3 id="nested-playscopes">Nested Playscopes</h3>
+<p>You can have any number of playscopes in a playtree. There a rules that restrict how playscopes can overlap one another, though.</p>
+<p>The first rule is that two playscopes can&rsquo;t have exactly the same playnodes. Counters that track plays for playnodes, playedges, and songs have to unambiguously land within one playscope. If two playscopes had exactly the same playnodes, there&rsquo;d be no sensible way to choose between them. Similarly, two playscopes aren&rsquo;t allowed to overlap <em>partially</em>. Again, there&rsquo;s not a sensible way to unambiguously assign a playscope to a playnode that falls in the intersection of two partially overlapping playscopes.</p>
+<p>Two playscopes <em>are</em> allowed to overlap, though, if one playscope completely and strictly contains the other. That is, the set of playnodes \(S_1\) in one playscope has to be a strict subset of the set of playnodes \(S_2\) in the other playscope—\(S_1 \subset S_2\). In this case, \(S_1\) is the more <em>specific</em> playscope. The counters in a playnode get assigned to the most specific playscope. If playback enters a more specific playscope from a less specific playscope that contains it, the counters from the less specific playscope aren&rsquo;t reset yet.</p>
+<p>A playedge&rsquo;s counters get assigned to the most specific playscope shared by both its source and target playnode.</p>
+<p>Every playnode falls into the &ldquo;global&rdquo; playscope by default. It&rsquo;s the least specific playscope, and every custom playscope is contained within it. You might get an error if one of your playscopes contains every playnode. That&rsquo;s because it breaks the first rule: it&rsquo;s exactly the same as the global playscope.</p>
+<p>Let&rsquo;s take an example to make things clearer. Instead of making a zipper shuffle, let&rsquo;s make a &ldquo;stacked shuffle.&rdquo; In a stacked shuffle, one playlist will shuffle all of its songs in one go, pass playback to another playlist which randomly chooses one song to play. Then, the first playlist shuffles all its songs again, and the second playlist picks its second song in the shuffle to play, repeating this process until all songs in the second playlist have played through.</p>
+<p><img src="stacked-shuffle-many-playnode.png" alt="medium">
+<img src="stacked-shuffle-one-playnode.png" alt="medium">
+<img src="stacked-shuffle.png" alt="small"></p>
+<p>There are two playscopes, cyan and yellow. The cyan playscope contains the &ldquo;Many&rdquo; and &ldquo;One-off&rdquo; playnodes, and the yellow playscope just contains &ldquo;Many.&rdquo; The counters for the songs in &ldquo;Many&rdquo; get assigned to the yellow playscope, because it&rsquo;s more specific than the blue playscope. The playcounters for the songs in &ldquo;One-off&rdquo; get assigned to the cyan playscope.</p>
+<p>The &ldquo;Many&rdquo; playnode shuffles through all its four songs, and passes playback to &ldquo;One-off.&rdquo; At this point, the yellow playscope is exited, so the counters for the songs in &ldquo;Many&rdquo; are reset. &ldquo;One-off&rdquo; selects one song to play, and passes playback to &ldquo;Many.&rdquo; Although the yellow playscope is <em>entered</em>, the cyan playscope isn&rsquo;t <em>exited</em>, and so the counters for the songs in &ldquo;One-off&rdquo; <em>don&rsquo;t</em> reset. Whichever song was chosen stays limited and won&rsquo;t be selected the next time &ldquo;One-off&rdquo; plays.</p>
+<p>The playedge from &ldquo;One-off&rdquo; to &ldquo;Many&rdquo; is limited so that &ldquo;One-off&rdquo; only plays four times. The playedge&rsquo;s counter is assigned to cyan scope, which is the most specific scope shared by both &ldquo;Many&rdquo; and &ldquo;One-off.&rdquo; After the fourth time &ldquo;One-off&rdquo; plays, the playedge is now limited, and so the playedge to &ldquo;Reset&rdquo; is chosen. Playback exits the cyan scope, and so the counters for the songs in &ldquo;Many,&rdquo; the songs in &ldquo;One-off,&rdquo; and the playedge in between are all reset. Playback passes through &ldquo;Reset&rdquo; and goes to &ldquo;Many,&rdquo; starting the whole stacked shuffle over again.</p>
+<p>Having an empty &ldquo;Reset&rdquo; playnode is useful, especially for illustration, but it isn&rsquo;t the only way out of a playscope. Playback could exit a playscope and play a whole bunch of other stuff before coming back to a shuffle, and things will still work the same.</p>
+
+    </article>
+    <aside>
+      
+    </aside>
+  </section>
+
+    
+    
+    
+  </body>
+</html>

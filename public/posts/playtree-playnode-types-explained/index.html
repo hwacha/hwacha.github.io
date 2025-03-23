@@ -1,0 +1,121 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>
+      Bill Marcy
+    </title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+      <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script>
+  MathJax = {
+    tex: {
+      displayMath: [['\\[', '\\]'], ['$$', '$$']],  
+      inlineMath: [['\\(', '\\)']]                  
+    },
+    loader:{
+      load: ['ui/safe']
+    },
+  };
+</script>
+    
+    
+    
+    
+        
+        
+            <link rel="stylesheet" href="/css/main.b8c8a70cd65c989b52395751fabbf4548aac6aa932cf58267b350b61df7a343e.css" integrity="sha256-uMinDNZcmJtSOVdR&#43;rv0VIqsaqkyz1gmezULYd96ND4=" crossorigin="anonymous">
+        
+        
+    
+    
+  </head>
+  <body>
+    
+    
+  <a href="/">
+    <div class="viewport">
+      <div class="cube">
+          <div class="face front"></div>
+          <div class="face front-top"></div>
+          <div class="face top"><div style="transform: rotate(90deg); margin-top: 22%;">Home</div></div>
+          <div class="face back-top"></div>
+          <div class="face back"></div>
+          <div class="face back-bottom"></div>
+          <div class="face bottom"></div>
+          <div class="face front-bottom"></div>
+          
+          <div class="face front-right"></div>
+          <div class="face right"></div>
+          <div class="face back-right"></div>
+          
+          <div class="face back-left"></div>
+          <div class="face left"></div>
+          <div class="face front-left"></div>
+          
+          <div class="face top-right"></div>
+          
+          <div class="face bottom-right"></div>
+          
+          <div class="face bottom-left"></div>
+          
+          <div class="face top-left"></div>
+          
+          <div class="face front-top-right"></div>
+          <div class="face back-top-right"></div>
+          <div class="face back-top-left"></div>
+          <div class="face front-top-left"></div>
+          <div class="face front-bottom-right"></div>
+          <div class="face back-bottom-right"></div>
+          <div class="face back-bottom-left"></div>
+          <div class="face front-bottom-left"></div>
+      </div>
+    </div>
+  </a>
+  <section>
+    <h1>Playtree Playnode Types Explained</h1>
+    
+    <article>
+      <p>Up to this point, playnodes have contained a single song. In practice, though, it would be tedious to have to make a playnode and playedges for every single song you want in a playtree. The playnodes in the Playtree app are containers for any number of songs. Because playnodes can handle collections of songs, it opens the possibility of adding whole playlists into a playnode.</p>
+<p>Playnodes come in two types: <strong>sequencers</strong> and <strong>selectors</strong>.</p>
+<h3 id="sequencer-playnodes">Sequencer playnodes</h3>
+<p>A sequencer takes each of its songs and plays them all in order before passing playback to a playedge.</p>
+<p><img src="sequencer-playnode.png" alt="medium"></p>
+<p>This is a sequencer playnode, designated with the number icon and the green color. It plays &ldquo;Spring,&rdquo; then &ldquo;Summer,&rdquo; then &ldquo;Autumn Leaves,&rdquo; then &ldquo;Winter Wonderland,&rdquo; and then playback moves to one of its outgoing playedges.</p>
+<p>Here, you&rsquo;ll see that the playnode&rsquo;s limit is set to <code>-1</code>. This means that the playnode doesn&rsquo;t have a limit on the number of times it can play. You might also notice the repeat parameter to the left of the limit. A repeat value of <code>3</code>, for example, will repeat the season sequence three times before passing playback.</p>
+<h3 id="selector-playnodes">Selector playnodes</h3>
+<p>A selector will randomly select one of its songs to play and, after one song, pass playback to its outgoing playedges.</p>
+<p><img src="selector-playnode.png" alt="medium"></p>
+<p>A selector playnode has a die icon and an orange color. It will select one song from &ldquo;Spring,&rdquo; &ldquo;Summer,&rdquo; &ldquo;Autumn Leaves,&rdquo; or &ldquo;Winter Wonderland,&rdquo; play it, and then pass playback.</p>
+<p>Note that the selector playnode is not a &ldquo;shuffle&rdquo;; the chances of selecting a song that just played are just as good the next time around. You can <em>construct</em> shuffle behavior from a selector with repeats and limits, but that behavior emerges from interacting features.</p>
+<h3 id="playnode-types-as-shorthand">Playnode types as shorthand</h3>
+<p>You can think of sequencers and selectors as shorthand for subgraphs. If we go back to our original &ldquo;One Song Per Node&rdquo; diagram format, you can think of the sequencer playnode as having this underlying structure:</p>
+<p><img src="sequencer-subgraph.png" alt="small"></p>
+<p>Alternatively, the selector playnode has this underlying structure:</p>
+<p><img src="selector-subgraph.png" alt="medium"></p>
+<p>Treat &ldquo;[entry point]&rdquo; and &ldquo;[exit point]&rdquo; as zero-song nodes that reduce the number of edges needed for illustration.</p>
+<p>(Note that the underlying subgraphs that would accurately correspond to all of each playnodes&rsquo; behaviors are slightly more complicated, but those extra details are omitted here for the sake of clarity. These analogies are basically right, for our purposes.)</p>
+<h3 id="playnode-parameters">Playnode parameters</h3>
+<p>The playnodes don&rsquo;t just have limit parameters. The individual songs in a playnode do, too. In a sequencer, playback will skip over a limited song. This is analogous to the playback behavior of a limited playnode. In a selector, a limited song won&rsquo;t be selected. This is analogous to limiting a playnode&rsquo;s incoming edge.</p>
+<p>You can imagine setting a song&rsquo;s <code>mult</code> or <em>multiplier</em> parameter to the value <code>n</code> as creating <code>n</code> copies of the song in the playnode. In a sequencer, this amounts to repeating the song <code>n</code> times. In a selector, it amounts to weighting the likelihood of choosing the song, like setting the shares value on an incoming edge.</p>
+<p>The <code>deg</code> (in older versions, &ldquo;exp&rdquo;) or <em>degree</em> parameter is related to priority. In a selector, setting a song&rsquo;s degree is like setting the priority value on an incoming edge: only available songs with the lowest degree will be selected to play. In a sequencer, playback will play each song of the lowest degree, in order, while skipping over the songs of higher degree. If a song is limited, its degree is no longer considered.</p>
+<p>The math underlying a sequencer&rsquo;s degree behavior is less intuitive than the math underlying a selector&rsquo;s, which is just the priority concept. This is the formula, but feel free to skip it if it doesn&rsquo;t make much sense. Let \(S\) be the set of songs in a sequencer, and \(A \subseteq S\) is the set of &ldquo;available&rdquo; songs in the sequencer that are not limited or set to <code>0</code> mult. Let \(D_A\) be the set of unique degree values in \(A\). Then the number of times a song \(s_i\) plays in the sequencer when playback reaches index \(i\) is given by</p>
+\[
+\begin{align}
+\lim_{x \to 0} \frac{mult_{s_i} * x^{deg_{s_i}}}{\sum\limits_{d \in D_A} x^{d}}.
+\end{align}
+\]<p>This limit evaluates to \(0\) when a song doesn&rsquo;t have the lowest degree, and evaluates to its <code>mult</code> value when it <em>does</em> have the lowest degree. Remember that you should treat a limited song&rsquo;s <code>mult</code> value as <code>0</code>.</p>
+
+    </article>
+    <aside>
+      
+    </aside>
+  </section>
+
+    
+    
+    
+  </body>
+</html>

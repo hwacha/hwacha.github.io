@@ -6,8 +6,22 @@
     <description>Recent content in Posts on Bill Marcy</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 21 Mar 2025 22:10:46 -0700</lastBuildDate>
+    <lastBuildDate>Sat, 22 Mar 2025 19:34:08 -0700</lastBuildDate>
     <atom:link href="https://hwacha.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Playtree Playscopes Explained</title>
+      <link>https://hwacha.github.io/posts/playtree-playscopes-explained/</link>
+      <pubDate>Sat, 22 Mar 2025 19:34:08 -0700</pubDate>
+      <guid>https://hwacha.github.io/posts/playtree-playscopes-explained/</guid>
+      <description>&lt;h3 id=&#34;shuffle&#34;&gt;Shuffle&lt;/h3&gt;&#xA;&lt;p&gt;You can make a shuffle playlist in Playtree with a selector:&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;90s-shuffle.png&#34; alt=&#34;medium&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;Each song is limited to one play, and the node is set to repeat five times. This means the selector will play all five songs in a random order, just like a shuffle playlist.&lt;/p&gt;&#xA;&lt;p&gt;But, by default, the counters that manage limiting plays during playback are &lt;em&gt;global&lt;/em&gt;: if you go back to this playnode later, all of the songs will still be limited.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Playtree Playnode Types Explained</title>
+      <link>https://hwacha.github.io/posts/playtree-playnode-types-explained/</link>
+      <pubDate>Sat, 22 Mar 2025 14:52:03 -0700</pubDate>
+      <guid>https://hwacha.github.io/posts/playtree-playnode-types-explained/</guid>
+      <description>&lt;p&gt;Up to this point, playnodes have contained a single song. In practice, though, it would be tedious to have to make a playnode and playedges for every single song you want in a playtree. The playnodes in the Playtree app are containers for any number of songs. Because playnodes can handle collections of songs, it opens the possibility of adding whole playlists into a playnode.&lt;/p&gt;&#xA;&lt;p&gt;Playnodes come in two types: &lt;strong&gt;sequencers&lt;/strong&gt; and &lt;strong&gt;selectors&lt;/strong&gt;.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Playtree Shares and Priority Explained</title>
       <link>https://hwacha.github.io/posts/playtree-shares-and-priority-explained/</link>
