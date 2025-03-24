@@ -34,6 +34,10 @@ body {
     margin-bottom: 3em;
 }
 
+.home-content p {
+    text-align: justify;
+}
+
 .home-viewport-container {
     display: flex;
     justify-content: center;
@@ -42,7 +46,7 @@ body {
 }
 
 section, .blurb-card {
-    max-width: 68em;
+    max-width: 44em;
     margin-top: 1em;
     margin-bottom: 1em;
     margin-left: auto;
@@ -106,4 +110,18 @@ pre > code {
     width: calc(100% - 18px);
     padding-left: 1em;
     text-wrap-mode: wrap;
+}
+
+.pagination {
+    display: flex;
+    padding-left: 0px;
+    width: 100%;
+    justify-content: center;
+}
+
+.page-item  {
+    list-style-image: none;
+    list-style: none;
+    margin-left: 8px;
+    margin-right: 8px;
 }

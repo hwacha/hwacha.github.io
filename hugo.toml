@@ -2,6 +2,8 @@ baseURL = 'https://hwacha.github.io/'
 languageCode = 'en-us'
 title = 'Bill Marcy'
 
+sectionPagesMenu = 'main'
+
 [caches]
   [caches.images]
     dir = ':cacheDir/images'

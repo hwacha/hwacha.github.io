@@ -2,6 +2,9 @@
 date = '2025-03-22T19:34:08-07:00'
 draft = true
 title = 'Playtree Playscopes Explained'
+tags = 'explainer'
+[params]
+    rank = 104
 +++
 
 ### Shuffle
@@ -23,15 +26,15 @@ Let's update our shuffle so it can shuffle more than once:
 
 The blue box around "90s Alphabet Shuffle" is a playscope. The "Reset" playnode has no songs: it exists to allow playback to exit the blue scope, resetting the play counters on the shuffle songs. Letting this play through will shuffle the five songs, shuffle the five songs again in a different order, and so on, indefinitely.
 
-Playscopes can apply to multiple playnodes. Let's add another shuffle playnode:
+Playscopes can apply to multiple playnodes. Let's add another shuffle playnode—
 
 ![medium](70s-shuffle.png)
 
-and make a "zipper shuffle" out of these two playlists: randomly play one song from the 90s playlist, then randomly play one song from the 70s playlist, then choose a different song from the 90s playlist, then choose a different song from the 70s playlist, etc.
+—and make a "zipper shuffle" out of these two playlists: randomly play one song from the 90s playlist, then randomly play one song from the 70s playlist, then choose a different song from the 90s playlist, then choose a different song from the 70s playlist, etc.
 
 ![small](zipper-shuffle.png)
 
-Playback cycles between the two selectors five times, all the while staying in the blue playscope. Then, the playedge from "70s..." to "90s" is limited, and the playedge to "Reset" is followed. The "Reset" playnode is not in the blue playscope, and so all of the counters in the blue playscope are reset to `0`. This includes the playedge that was limited to `4`. Playback passes through the empty "Reset" playnode to "90s...," which starts the zipper shuffle all over again.
+Playback cycles between the two selectors five times, all the while staying in the blue playscope. Then, the playedge from "70s..." to "90s..." is limited, and the playedge to "Reset" is followed. The "Reset" playnode is not in the blue playscope, and so all of the counters in the blue playscope are reset to `0`. This includes the playedge that was limited to `4`. Playback passes through the empty "Reset" playnode to "90s...," which starts the zipper shuffle all over again.
 
 ---
 

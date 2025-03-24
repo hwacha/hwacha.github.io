@@ -2,6 +2,9 @@
 date = '2025-03-20T12:28:54-07:00'
 draft = true
 title = 'Playtree Structure Explained'
+tags = 'challenge'
+[params]
+    rank = 100
 +++
 
 In this article, I'll explain what a playtree structure is. A basic familiarity with sequences and cycles, trees, graphs, and linked lists is assumed.

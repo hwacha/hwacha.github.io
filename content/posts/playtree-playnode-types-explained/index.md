@@ -2,6 +2,9 @@
 date = '2025-03-22T14:52:03-07:00'
 draft = true
 title = 'Playtree Playnode Types Explained'
+tags = 'explainer'
+[params]
+    rank = 103
 +++
 Up to this point, playnodes have contained a single song. In practice, though, it would be tedious to have to make a playnode and playedges for every single song you want in a playtree. The playnodes in the Playtree app are containers for any number of songs. Because playnodes can handle collections of songs, it opens the possibility of adding whole playlists into a playnode.
 
