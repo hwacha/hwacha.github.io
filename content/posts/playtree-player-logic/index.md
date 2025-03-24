@@ -2,7 +2,7 @@
 date = '2025-03-19T15:09:52-07:00'
 draft = true
 title = 'Playtree Player Logic'
-tags = 'explainer'
+tags = ['playtree', 'challenge']
 [params]
     rank = 21
 +++

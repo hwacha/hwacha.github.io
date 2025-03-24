@@ -2,7 +2,7 @@
 date = '2025-03-20T12:28:54-07:00'
 draft = true
 title = 'Playtree Structure Explained'
-tags = 'challenge'
+tags = ['playtree', 'explainer']
 [params]
     rank = 100
 +++
@@ -70,3 +70,7 @@ Usually, your playtrees end up such that every node is reachable by exactly one 
 ![medium](islands-odd-playroots.png)
 
 This playtree is valid, even though it has an arguably redundant playroot assigned to "Call Me," and even though "Cars" and "Mustang Sally" are not reachable from any playroot. A user editing a playtree will be warned if a node isn't reachable, as this might be a mistake, but the playtree is still valid nonetheless.
+
+---
+
+This next topic is [limits](/posts/playtree-limits-explained/).

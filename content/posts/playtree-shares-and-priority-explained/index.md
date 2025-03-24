@@ -2,7 +2,7 @@
 date = '2025-03-21T22:10:46-07:00'
 draft = true
 title = 'Playtree Shares and Priority Explained'
-tags = 'explainer'
+tags = ['playtree', 'explainer']
 [params]
     rank = 101
 +++
@@ -103,3 +103,7 @@ With priority, we can impose a sequential order on selection. Let's go back to o
 ![alt](days-with-priority.png)
 
 Now, "=> Sunday Morning" is selected first, then "=> Manic Monday," and so on, until, finally, "=> Saturday in the Park" is selected.
+
+---
+
+The next topic is [playnode types](/posts/playtree-playnode-types-explained/).

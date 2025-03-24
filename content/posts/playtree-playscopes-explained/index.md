@@ -2,7 +2,7 @@
 date = '2025-03-22T19:34:08-07:00'
 draft = true
 title = 'Playtree Playscopes Explained'
-tags = 'explainer'
+tags = ['playtree', 'explainer']
 [params]
     rank = 104
 +++
