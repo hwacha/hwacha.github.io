@@ -2,13 +2,33 @@
   <main>
     {{ .Content }}
 
-    {{ $pages := where site.RegularPages "Type" "posts" }}
-    {{ $paginator := .Paginate $pages }}
+    {{ $allPages := .Site.Pages }}
+    {{ $subSections := $allPages.GroupBy "Section" }}
+    {{ $currentSection := .Section }}
 
-    {{ range $paginator.Pages }}
-      <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
+    {{ range $sectionGroup := $subSections }}
+      {{ if eq $sectionGroup.Key (printf "%s/%s" $currentSection (path.Base $sectionGroup.Key)) }}
+        <h2>Subsections</h2>
+        <ul>
+          <li><a href="{{ (index $sectionGroup.Pages 0).Permalink }}">{{ path.Base $sectionGroup.Key | title }}</a></li>
+        </ul>
+      {{ end }}
     {{ end }}
 
-    {{ template "_internal/pagination.html" . }}
+    {{ $pages := where .Site.RegularPages "Section" .Section }}
+
+    {{ if $pages }}
+      <h2>Pages</h2>
+      <ul>
+        {{ range $pages }}
+          <li><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>
+        {{ end }}
+      </ul>
+    {{ end }}
+
+    {{ if and (eq (len $subSections) 0) (eq (len $pages) 0) }}
+      <p>This section is empty.</p>
+    {{ end }}
+
   </main>
 {{ end }}

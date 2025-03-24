@@ -2,6 +2,9 @@
 date = '2025-03-21T22:10:46-07:00'
 draft = true
 title = 'Playtree Shares and Priority Explained'
+tags = 'explainer'
+[params]
+    rank = 101
 +++
 
 In this post I'll explain *shares* and *priority*, parameters that apply to playedges. It presumes a familiarity with basic probability and the concept of mathematical limits.

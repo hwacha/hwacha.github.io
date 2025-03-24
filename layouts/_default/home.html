@@ -42,14 +42,22 @@
     
     {{ .Content }}
   </div>
-  {{ range site.RegularPages }}
-    <div class="home-links">
-        <div class="blurb-card">
-          <a href="{{ .RelPermalink }}" style="text-decoration:none; color: inherit;"><h1>{{ .LinkTitle }}</h1></a>
-          <div class="blurb-window">{{ .Summary }}</div>
-          <a href="{{ .RelPermalink }}">[Read more]</a>
-        </div>
-      </a>
-    </div>
-  {{ end }}
+  <div class="display:flex;">
+    {{/*  {{ partial "menu.html" (dict "menuID" "main" "page" .) }}  */}}
+    {{ $sortedPages := .Site.RegularPages.ByParam "rank" }}
+    {{ $paginator := .Paginate $sortedPages 5}}
+    {{ range $paginator.Pages }}
+      <div class="home-links">
+          <div class="blurb-card">
+            <a href="{{ .RelPermalink }}" style="text-decoration:none; color: inherit;"><h1>{{ .LinkTitle }}</h1></a>
+            <div class="blurb-window">{{ .Summary }}</div>
+            <a href="{{ .RelPermalink }}">[Read more]</a>
+          </div>
+        </a>
+      </div>
+    {{ end }}
+  </div>
+  {{ template "_internal/pagination.html" . }}
 {{ end }}
+
+

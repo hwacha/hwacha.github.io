@@ -2,6 +2,9 @@
 date = '2025-03-21T19:44:56-07:00'
 draft = true
 title = 'Playtree Limits Explained'
+tags = 'explainer'
+[params]
+    rank = 102
 +++
 In this post, I'll explain how limits work in Playtree.
 

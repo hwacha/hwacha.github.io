@@ -2,6 +2,8 @@
 date = '2025-03-19T19:44:50-07:00'
 draft = true
 title = 'Some Nifty MacOS Terminal Commands'
+[params]
+    rank = 10
 +++
 In the course of making [Playtree](/posts/playtree-technical-overview), I came across some esoteric terminal commands for MacOS. To start with the least useful:
 ```
