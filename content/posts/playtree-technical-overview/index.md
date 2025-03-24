@@ -15,7 +15,7 @@ Check out the [playtree explainers](/posts/playtree-structure-explained/) for a 
 
 ## At a Glance
 
-![alt](example-playtree.png)
+![alt](/posts/playtree-technical-overview/example-playtree.png)
 
 Playtree is a web application for creating custom playtrees, which are directed graphs. Playnodes contain songs to be played, and playedges define a path playback can follow.
 

@@ -10,7 +10,7 @@ tags = ['playtree', 'explainer']
 ### Shuffle
 You can make a shuffle playlist in Playtree with a selector:
 
-![medium](90s-shuffle.png)
+![medium](/posts/playtree-playscopes-explained/90s-shuffle.png)
 
 Each song is limited to one play, and the node is set to repeat five times. This means the selector will play all five songs in a random order, just like a shuffle playlist.
 
@@ -22,17 +22,17 @@ If you want to run through a shuffle again, you'll want to use a *playscope*. A 
 
 Let's update our shuffle so it can shuffle more than once:
 
-![medium](90s-shuffle-with-reset.png)
+![medium](/posts/playtree-playscopes-explained/90s-shuffle-with-reset.png)
 
 The blue box around "90s Alphabet Shuffle" is a playscope. The "Reset" playnode has no songs: it exists to allow playback to exit the blue scope, resetting the play counters on the shuffle songs. Letting this play through will shuffle the five songs, shuffle the five songs again in a different order, and so on, indefinitely.
 
 Playscopes can apply to multiple playnodes. Let's add another shuffle playnode—
 
-![medium](70s-shuffle.png)
+![medium](/posts/playtree-playscopes-explained/70s-shuffle.png)
 
 —and make a "zipper shuffle" out of these two playlists: randomly play one song from the 90s playlist, then randomly play one song from the 70s playlist, then choose a different song from the 90s playlist, then choose a different song from the 70s playlist, etc.
 
-![small](zipper-shuffle.png)
+![small](/posts/playtree-playscopes-explained/zipper-shuffle.png)
 
 Playback cycles between the two selectors five times, all the while staying in the blue playscope. Then, the playedge from "70s..." to "90s..." is limited, and the playedge to "Reset" is followed. The "Reset" playnode is not in the blue playscope, and so all of the counters in the blue playscope are reset to `0`. This includes the playedge that was limited to `4`. Playback passes through the empty "Reset" playnode to "90s...," which starts the zipper shuffle all over again.
 
@@ -52,9 +52,9 @@ Every playnode falls into the "global" playscope by default. It's the least spec
 
 Let's take an example to make things clearer. Instead of making a zipper shuffle, let's make a "stacked shuffle." In a stacked shuffle, one playlist will shuffle all of its songs in one go, pass playback to another playlist which randomly chooses one song to play. Then, the first playlist shuffles all its songs again, and the second playlist picks its second song in the shuffle to play, repeating this process until all songs in the second playlist have played through.
 
-![medium](stacked-shuffle-many-playnode.png)
-![medium](stacked-shuffle-one-playnode.png)
-![small](stacked-shuffle.png)
+![medium](/posts/playtree-playscopes-explained/stacked-shuffle-many-playnode.png)
+![medium](/posts/playtree-playscopes-explained/stacked-shuffle-one-playnode.png)
+![small](/posts/playtree-playscopes-explained/stacked-shuffle.png)
 
 There are two playscopes, cyan and yellow. The cyan playscope contains the "Many" and "One-off" playnodes, and the yellow playscope just contains "Many." The counters for the songs in "Many" get assigned to the yellow playscope, because it's more specific than the blue playscope. The playcounters for the songs in "One-off" get assigned to the cyan playscope.
 

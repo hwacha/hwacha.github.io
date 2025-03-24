@@ -21,17 +21,17 @@ Many of the rules governing valid playtrees are implicitly enforced by the edito
 
 In some cases, however, the UI still allows a user to make invalid playtrees. For example, the user can enter invalid input in one of the text fields. An error decoration is added to invalid input fields, and the parameter will be set to its default value on save if the user doesn't correct the input first.
 
-![alt](invalid-input-field.png)
+![alt](/posts/playtree-editor-ui/invalid-input-field.png)
 
 #### Validation on save
 Some features involve ensuring graph-wide invariants and are therefore checked before a playtree is saved. The editor will issue a warning if a user's playtree doesn't have a playroot. If no playroot is assigned to a playnode, playback can't start anywhere.
 
-![alt](no-playroots-warning.png)
+![alt](/posts/playtree-editor-ui/no-playroots-warning.png)
 
 This playtree is considered valid; it doesn't violate any playtree rules. Still, the user probably didn't intend to make a playtree that doesn't start playback anywhere, and so they are issued a warning.
 
 The editor also checks if a user's playscopes are valid. Playscopes can't partially overlap other playscopes, or be redundant. A playtree with invalid playscopes can't unambiguously apply scope rules, and so it is invalid as a playtree.
 
-![alt](invalid-playscopes-error.png)
+![alt](/posts/playtree-editor-ui/invalid-playscopes-error.png)
 
 When the user tries to save an invalid playtree, an error is reported in the editor. Notice that the save icon is still visible. Invalid playtrees are not saved to the server.
