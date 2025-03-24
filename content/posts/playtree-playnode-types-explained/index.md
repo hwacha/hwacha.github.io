@@ -2,7 +2,7 @@
 date = '2025-03-22T14:52:03-07:00'
 draft = true
 title = 'Playtree Playnode Types Explained'
-tags = 'explainer'
+tags = ['playtree', 'explainer']
 [params]
     rank = 103
 +++
@@ -57,3 +57,7 @@ The math underlying a sequencer's degree behavior is less intuitive than the mat
 \]
 
 This limit evaluates to \(0\) when a song doesn't have the lowest degree, and evaluates to its `mult` value when it *does* have the lowest degree. Remember that you should treat a limited song's `mult` value as `0`.
+
+---
+
+The next topic is [playscopes](/posts/playtree-playscopes-explained/).

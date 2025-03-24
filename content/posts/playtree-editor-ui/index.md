@@ -2,6 +2,7 @@
 date = '2025-03-19T14:36:22-07:00'
 draft = true
 title = 'Playtree Editor UI'
+tags = ['playtree', 'challenge']
 [params]
     rank = 22
 +++

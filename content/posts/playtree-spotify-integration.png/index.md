@@ -2,7 +2,7 @@
 date = '2025-03-19T15:23:36-07:00'
 draft = true
 title = 'Playtree Spotify Integration'
-tags = 'challenge'
+tags = ['playtree', 'challenge']
 [params]
     rank = 20
 +++

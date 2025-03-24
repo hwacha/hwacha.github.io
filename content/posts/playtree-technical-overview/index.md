@@ -2,7 +2,7 @@
 date = '2025-03-18T12:55:36-07:00'
 draft = true
 title = 'Playtree Technical Overview'
-tags = 'overview'
+tags = ['playtree', 'overview']
 menus = 'main'
 
 [params]
@@ -10,6 +10,8 @@ menus = 'main'
 +++
 
 Playtree is an application for making and listening to *playtrees*, which are like playlists, except that playback can branch, loop, and start at multiple entry points. You can try out playtree [here](https://playtree.gdn). In this post, I'll provide a broad overview of Playtree and its development.
+
+Check out the [playtree explainers](/posts/playtree-structure-explained/) for a more in-depth explanation of playtrees.
 
 ## At a Glance
 

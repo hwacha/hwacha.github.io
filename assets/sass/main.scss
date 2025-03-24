@@ -23,8 +23,6 @@ body {
     line-height: 1.5em;
 }
 
-
-
 .home-content {
     max-width: 40em;
     margin-left:auto;
@@ -46,11 +44,12 @@ body {
 }
 
 section, .blurb-card {
-    max-width: 44em;
+    max-width: 48em;
     margin-top: 1em;
     margin-bottom: 1em;
     margin-left: auto;
     margin-right: auto;
+    text-align: justify;
     border: 4px solid light-dark(rgba(0, 0, 0, 0.9), rgba(255, 255, 255, 0.9));
     border-radius: 16px;
     padding: 2em;

@@ -2,7 +2,7 @@
 date = '2025-03-21T19:44:56-07:00'
 draft = true
 title = 'Playtree Limits Explained'
-tags = 'explainer'
+tags = ['playtree', 'explainer']
 [params]
     rank = 102
 +++
@@ -39,3 +39,7 @@ The songs that bookend this fantastic album are 12+ minutes each! You might want
 In this playtree, all songs will play through once, and then on the second pass, playback will skip "Shine On You Crazy Diamond (Pts. 1-5)" and pass through to "Welcome to the Machine." After "Wish You Were Here" finishes a second time, playback will pass through both Crazy Diamonds and on to "Welcome to the Machine" again.
 
 Playback iteratively passes through limited nodes until it finds something to play. It's possible to make a playtree that infinitely cycles through nodes that are all limited. In such a scenario, playback will try to find a node up to a maximum number of iterations (currently set to 10,000), at which point playback will terminate as a failsafe.
+
+---
+
+The next topic is [shares and priority](/posts/playtree-shares-and-priority-explained/).
