@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Home on Bill Marcy</title>
-    <link>https://hwacha.github.io/</link>
-    <description>Recent content in Home on Bill Marcy</description>
+    <title>Playtree on Bill Marcy</title>
+    <link>https://hwacha.github.io/tags/playtree/</link>
+    <description>Recent content in Playtree on Bill Marcy</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 22 Mar 2025 19:34:08 -0700</lastBuildDate>
-    <atom:link href="https://hwacha.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://hwacha.github.io/tags/playtree/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Playtree Playscopes Explained</title>
       <link>https://hwacha.github.io/posts/playtree-playscopes-explained/</link>
@@ -42,13 +42,6 @@
       <pubDate>Thu, 20 Mar 2025 12:28:54 -0700</pubDate>
       <guid>https://hwacha.github.io/posts/playtree-structure-explained/</guid>
       <description>&lt;p&gt;In this article, I&amp;rsquo;ll explain what a playtree structure is. A basic familiarity with sequences and cycles, trees, graphs, and linked lists is assumed.&lt;/p&gt;&#xA;&lt;p&gt;There&amp;rsquo;s no doubt you&amp;rsquo;re familiar with playlists. Let&amp;rsquo;s take an example of one on Spotify:&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;small-talk-spotify-playlist.png&#34; alt=&#34;small&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;If you play this playlist without shuffle or loop toggled on, it will start playing &amp;ldquo;Hello.&amp;rdquo; After &amp;ldquo;Hello&amp;rdquo; finishes, &amp;ldquo;What&amp;rsquo;s Up?&amp;rdquo; will start playing. Then, &amp;ldquo;I&amp;rsquo;m Alright.&amp;rdquo; This will carry on until &amp;ldquo;See You Later, Alligator,&amp;rdquo; the last song in the playlist, finishes. After that, playback stops. We can model the playlist&amp;rsquo;s playback behavior with the following directed graph:&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Some Nifty MacOS Terminal Commands</title>
-      <link>https://hwacha.github.io/posts/some-nifty-macos-terminal-commands/</link>
-      <pubDate>Wed, 19 Mar 2025 19:44:50 -0700</pubDate>
-      <guid>https://hwacha.github.io/posts/some-nifty-macos-terminal-commands/</guid>
-      <description>&lt;p&gt;In the course of making &lt;a href=&#34;https://hwacha.github.io/posts/playtree-technical-overview&#34;&gt;Playtree&lt;/a&gt;, I came across some esoteric terminal commands for MacOS. To start with the least useful:&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;afplay &amp;lt;audio_file&amp;gt;&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;will play a specified audio file from the command line. I used this in an early CLI prototype for Playtree, but its utility is pretty limited. There&amp;rsquo;s no way to control audio once playback starts. You can stop playback by sending an interrupt signal with &lt;code&gt;CTRL-C&lt;/code&gt;, and you can &amp;ldquo;mute&amp;rdquo; audio by suspending the process with &lt;code&gt;CTRL-Z&lt;/code&gt;. This doesn&amp;rsquo;t pause playback, though. It&amp;rsquo;s still playing through silently in the background.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Playtree Spotify Integration</title>

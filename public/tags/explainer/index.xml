@@ -37,11 +37,11 @@
       <description>&lt;p&gt;In this post, I&amp;rsquo;ll explain how limits work in Playtree.&lt;/p&gt;&#xA;&lt;h3 id=&#34;limiting-playedges&#34;&gt;Limiting Playedges&lt;/h3&gt;&#xA;&lt;p&gt;&lt;img src=&#34;three-birds-no-limit.png&#34; alt=&#34;medium&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;This playtree will start at &amp;ldquo;Three Little Birds,&amp;rdquo; play one of &amp;ldquo;Blackbird,&amp;rdquo; &amp;ldquo;Free Bird,&amp;rdquo; or &amp;ldquo;Surfin&amp;rsquo; Bird,&amp;rdquo; play &amp;ldquo;No Birds,&amp;rdquo; and then repeat forever. In case you&amp;rsquo;re not familiar with these tunes, &amp;ldquo;Free Bird&amp;rdquo; is over 9 minutes long, and &amp;ldquo;Surfin&amp;rsquo; Bird&amp;rdquo; is best enjoyed in moderation. You might want to set a limit on how many times those songs can be selected.&lt;/p&gt;</description>
     </item>
     <item>
-      <title>Playtree Player Logic</title>
-      <link>https://hwacha.github.io/posts/playtree-player-logic/</link>
-      <pubDate>Wed, 19 Mar 2025 15:09:52 -0700</pubDate>
-      <guid>https://hwacha.github.io/posts/playtree-player-logic/</guid>
-      <description>&lt;p&gt;The rules that govern playback on a playtree are rather complicated. The user can play and pause audio, skip forward, go back to previously played songs, which must be memoized when playback randomly branches. Additionally, a user can switch between playheads, which loads/reloads a full playback context.&lt;/p&gt;&#xA;&lt;p&gt;I use a &lt;a href=&#34;https://react.dev/reference/react/useReducer&#34;&gt;reducer&lt;/a&gt; to handle playback logic. A reducer is a pure function which takes a state and an action and returns a state. Actions are dispatched as a response to UI events and external state changes, prompting an internal state update according to the reducer function. This provides a clean way to manage the logic of complex state updates.&lt;/p&gt;</description>
+      <title>Playtree Structure Explained</title>
+      <link>https://hwacha.github.io/posts/playtree-structure-explained/</link>
+      <pubDate>Thu, 20 Mar 2025 12:28:54 -0700</pubDate>
+      <guid>https://hwacha.github.io/posts/playtree-structure-explained/</guid>
+      <description>&lt;p&gt;In this article, I&amp;rsquo;ll explain what a playtree structure is. A basic familiarity with sequences and cycles, trees, graphs, and linked lists is assumed.&lt;/p&gt;&#xA;&lt;p&gt;There&amp;rsquo;s no doubt you&amp;rsquo;re familiar with playlists. Let&amp;rsquo;s take an example of one on Spotify:&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;small-talk-spotify-playlist.png&#34; alt=&#34;small&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;If you play this playlist without shuffle or loop toggled on, it will start playing &amp;ldquo;Hello.&amp;rdquo; After &amp;ldquo;Hello&amp;rdquo; finishes, &amp;ldquo;What&amp;rsquo;s Up?&amp;rdquo; will start playing. Then, &amp;ldquo;I&amp;rsquo;m Alright.&amp;rdquo; This will carry on until &amp;ldquo;See You Later, Alligator,&amp;rdquo; the last song in the playlist, finishes. After that, playback stops. We can model the playlist&amp;rsquo;s playback behavior with the following directed graph:&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
