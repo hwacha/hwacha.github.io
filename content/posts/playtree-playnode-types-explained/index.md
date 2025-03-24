@@ -13,7 +13,7 @@ Playnodes come in two types: **sequencers** and **selectors**.
 ### Sequencer playnodes
 A sequencer takes each of its songs and plays them all in order before passing playback to a playedge.
 
-![medium](sequencer-playnode.png)
+![medium](/posts/playtree-playnode-types-explained/sequencer-playnode.png)
 
 This is a sequencer playnode, designated with the number icon and the green color. It plays "Spring," then "Summer," then "Autumn Leaves," then "Winter Wonderland," and then playback moves to one of its outgoing playedges.
 
@@ -22,7 +22,7 @@ Here, you'll see that the playnode's limit is set to `-1`. This means that the p
 ### Selector playnodes
 A selector will randomly select one of its songs to play and, after one song, pass playback to its outgoing playedges.
 
-![medium](selector-playnode.png)
+![medium](/posts/playtree-playnode-types-explained/selector-playnode.png)
 
 A selector playnode has a die icon and an orange color. It will select one song from "Spring," "Summer," "Autumn Leaves," or "Winter Wonderland," play it, and then pass playback.
 
@@ -31,11 +31,11 @@ Note that the selector playnode is not a "shuffle"; the chances of selecting a s
 ### Playnode types as shorthand
 You can think of sequencers and selectors as shorthand for subgraphs. If we go back to our original "One Song Per Node" diagram format, you can think of the sequencer playnode as having this underlying structure:
 
-![small](sequencer-subgraph.png)
+![small](/posts/playtree-playnode-types-explained/sequencer-subgraph.png)
 
 Alternatively, the selector playnode has this underlying structure:
 
-![medium](selector-subgraph.png)
+![medium](/posts/playtree-playnode-types-explained/selector-subgraph.png)
 
 Treat "[entry point]" and "[exit point]" as zero-song nodes that reduce the number of edges needed for illustration.
 

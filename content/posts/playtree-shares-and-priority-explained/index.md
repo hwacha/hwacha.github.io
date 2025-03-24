@@ -14,7 +14,7 @@ We have to refer to incoming edges a lot, so I'll use "=> playnode" as a shortha
 ---
 
 ### Shares
-![alt](days-no-shares.png)
+![alt](/posts/playtree-shares-and-priority-explained/days-no-shares.png)
 
 This playtree will play "One Week," and then randomly select one of the day songs. "One Week" has seven outgoing playedges, and so, by default, each one has a `1/7` chance of being selected.
 
@@ -22,7 +22,7 @@ You like all these songs, but you're a big fan of The Cure, and so you want "Fri
 
 Conveniently, you can set the playedge's *shares* parameter instead. The name "shares" is meant to evoke shares in a raffle; giving a playedge more shares increases its odds of winning the "playback lottery." Take "=> Friday I'm In Love" and set its shares to `6`. The chances of selecting that playedge rise up to `6/12 = 1/2`, and the other six edges each have a `1/12` chance of being selected.
 
-![alt](days-with-shares.png)
+![alt](/posts/playtree-shares-and-priority-explained/days-with-shares.png)
 
 The formula for a playedge \(e_i\)'s probability of being selected from a set of outgoing edges \(OE\) is
 
@@ -40,11 +40,11 @@ You can set a playedge's shares to `0`. This will mean that a playedge is never 
 
 ### Priority
 
-![small](numbers-no-priority.png)
+![small](/posts/playtree-shares-and-priority-explained/numbers-no-priority.png)
 
 Let's say you really wanted "One Time" to be selected first, once, and then "2 Times" to be selected next. How could you achieve this? Well, you could limit "=> One Time" to `1`, and set its shares to a really high value:
 
-![small](numbers-with-shares.png)
+![small](/posts/playtree-shares-and-priority-explained/numbers-with-shares.png)
 
 This playtree is *very likely* to do what you want; the probability is `9999/10,000`. But once every ten thousand runs or so, it will choose "=> 2 Times" first instead. You could keep adding shares, and it'll become more and more of a sure thing to work as expected.
 
@@ -66,7 +66,7 @@ It's this second limit that undergirds *priority*, another playedge parameter. O
 
 We can add priority values to the playedges in our playtree:
 
-![small](numbers-with-priority.png)
+![small](/posts/playtree-shares-and-priority-explained/numbers-with-priority.png)
 
 Now "=> One Time" has the lowest priority, so it is always selected first. Since its limit is set to `1`, the next time around, it's taken out of contention. Because it's now the lowest priority playedge in contention, "=> 2 Times" is now eligible for selection. It's chosen, and plays this second time around, just like we wanted.
 
@@ -100,7 +100,7 @@ $$\lim_{x \to 0} \frac{x^1 * 1}{x^0 * 0 + x^1 * 1} = \lim_{x \to 0} \frac{x}{x} 
 
 With priority, we can impose a sequential order on selection. Let's go back to our "days of the week" playtree and add priority values:
 
-![alt](days-with-priority.png)
+![alt](/posts/playtree-shares-and-priority-explained/days-with-priority.png)
 
 Now, "=> Sunday Morning" is selected first, then "=> Manic Monday," and so on, until, finally, "=> Saturday in the Park" is selected.
 

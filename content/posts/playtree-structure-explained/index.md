@@ -11,11 +11,11 @@ In this article, I'll explain what a playtree structure is. A basic familiarity 
 
 There's no doubt you're familiar with playlists. Let's take an example of one on Spotify:
 
-![small](small-talk-spotify-playlist.png)
+![small](/posts/playtree-structure-explained/small-talk-spotify-playlist.png)
 
 If you play this playlist without shuffle or loop toggled on, it will start playing "Hello." After "Hello" finishes, "What's Up?" will start playing. Then, "I'm Alright." This will carry on until "See You Later, Alligator," the last song in the playlist, finishes. After that, playback stops. We can model the playlist's playback behavior with the following directed graph:
 
-![small](small-talk-path-graph.png)
+![small](/posts/playtree-structure-explained/small-talk-path-graph.png)
 
 The songs of the playlist are contained within nodes. When playback reaches a node, the node's song plays.  After the song in a node is finished playing, playback moves along the directed edge to the next node.
 
@@ -23,19 +23,19 @@ Playback starts with "Hello," designated with the asterisk (*). Playback ends on
 
 This model of a playlist is a special kind of graph called a [*path graph*](https://en.wikipedia.org/wiki/Path_graph), and could be implemented with a [linked list](https://en.wikipedia.org/wiki/Linked_list) data structure. In this way, playlists are aptly named. Playback moves from the start of the list, to the next node, to the next, and so on, until it reaches the end of the list. If we were to toggle the loop button on this playlist, playback would continue from the last song, "See You Later, Alligator," to the first song, "Hello." Playback would look like this:
 
-![small](small-talk-cycle-graph.png)
+![small](/posts/playtree-structure-explained/small-talk-cycle-graph.png)
 
 Now, we have a [*cycle graph*](https://en.wikipedia.org/wiki/Cycle_graph), wherein playback continues indefinitely, moving from one node to the next. This could be implemented with a [circular linked list](https://en.wikipedia.org/wiki/Linked_list#Circular_linked_list).
 
 If we had shuffle mode toggled, we'd end up rearranging the nodes of the list and reassigning the starting point. One possible shuffle of our original playlist looks like this:
 
-![small](small-talk-shuffled.png)
+![small](/posts/playtree-structure-explained/small-talk-shuffled.png)
 
 Let's think about these path and cycle graphs in terms of their essential constraints. Every node must have exactly one edge going out, except the last node, which has none, if loop mode is toggled off. And every node must have exactly one edge coming in, except the starting node, which has none, if loop mode is toggled off. And no node can have a [*loop*](https://en.wikipedia.org/wiki/Loop_(graph_theory)): an edge that connects from a node to itself (except for one-song playlists with loop-mode toggled on). What if we lifted these constraints? What kind of playback behavior could follow from that?
 
 Let's start by allowing every node to have any number of edges going out. Then, we could make tree structures like this:
 
-![medium](small-talk-tree.png)
+![medium](/posts/playtree-structure-explained/small-talk-tree.png)
 
 How will playback progress once it finishes at a node with multiple outgoing edges? There are lots of ways we could define its behavior. We could have it so playback "splits" and plays both of the next nodes at the same time. But as I've defined it, playback progresses by randomly selecting one of the edges to follow.
 
@@ -45,7 +45,7 @@ Notice that this kind of branching behavior, where playback branches randomly bu
 
 We can go further and lift another constraint. We can allow every node to have any number of edges coming in. Also, let's allow loops (self-connecting edges). Here's an example graph structure made possible with those constraints lifted:
 
-![medium](small-talk-graph.png)
+![medium](/posts/playtree-structure-explained/small-talk-graph.png)
 
 Notice how multiple nodes can pass playback on to the same node, e.g. "Thank U" and "Sorry" to "No Problem." Also, cycles are now allowed: "Yeah!" passes playback back to itself, looping the song indefinitely once it is reached. The first song moves to "Wake Me Up," which might go back to "I'm Only Sleeping" or else progress to "I'm Awake Now."
 
@@ -59,7 +59,7 @@ Each of our examples so far have made an implicit assumption. There has been at 
 
 But what if we ignored even *this* assumption? Our graphs could look like "islands" instead. But, keep in mind that we want to make sure the nodes we put into the graph have a chance at being played. So, we allow for multiple starting points:
 
-![medium](small-talk-islands.png)
+![medium](/posts/playtree-structure-explained/small-talk-islands.png)
 
 How exactly does having multiple starting points affect playback behavior? Again, it's partly a matter of stipulation. In Playtree, starting points (called "playroots") can be assigned to any number of nodes, and they are given an index. When a user first plays a playtree, a playhead is created for each playroot. A playhead manages a playback context independent from every other playhead. Playheads are ordered according to the playroot index, and each playhead starts at the node a playroot was assigned to. When playback in a playhead reaches a stopping point, the playhead is reset, and playback is automatically passed to the next playhead by index. The user can also move between playheads with their Playtree controls. Think of it like switching between car CDs.
 
@@ -67,7 +67,7 @@ In this case, let's suppose that the playroot assigned to "Telephone" has index 
 
 Usually, your playtrees end up such that every node is reachable by exactly one playroot. But that's not enforced by Playtree. Consider the following playtree:
 
-![medium](islands-odd-playroots.png)
+![medium](/posts/playtree-structure-explained/islands-odd-playroots.png)
 
 This playtree is valid, even though it has an arguably redundant playroot assigned to "Call Me," and even though "Cars" and "Mustang Sally" are not reachable from any playroot. A user editing a playtree will be warned if a node isn't reachable, as this might be a mistake, but the playtree is still valid nonetheless.
 

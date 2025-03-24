@@ -20,7 +20,7 @@ If a playnode has reached its play limit, or if it has no songs, playback will i
 
 In order to prevent overrun conditions, I incorporate a loop counter. If a song is not found within 10,000 iterations of node traversal, playback resets to the beginning of a playnode. This, of course, means that certain otherwise valid playtrees won't work as expected when considered in ideal conditions:
 
-![medium](lots-of-iterations.png)
+![medium](/posts/playtree-player-logic/lots-of-iterations.png)
 
 We'd expect this playtree to loop the empty playnode 20,000 times and then play "After All These Years." Instead, the playtree's playhead will reset without playing anything.
 
