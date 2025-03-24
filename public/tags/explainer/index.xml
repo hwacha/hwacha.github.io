@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Explainer on Bill Marcy</title>
+    <link>https://hwacha.github.io/tags/explainer/</link>
+    <description>Recent content in Explainer on Bill Marcy</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 22 Mar 2025 19:34:08 -0700</lastBuildDate>
+    <atom:link href="https://hwacha.github.io/tags/explainer/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Playtree Playscopes Explained</title>
+      <link>https://hwacha.github.io/posts/playtree-playscopes-explained/</link>
+      <pubDate>Sat, 22 Mar 2025 19:34:08 -0700</pubDate>
+      <guid>https://hwacha.github.io/posts/playtree-playscopes-explained/</guid>
+      <description>&lt;h3 id=&#34;shuffle&#34;&gt;Shuffle&lt;/h3&gt;&#xA;&lt;p&gt;You can make a shuffle playlist in Playtree with a selector:&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;90s-shuffle.png&#34; alt=&#34;medium&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;Each song is limited to one play, and the node is set to repeat five times. This means the selector will play all five songs in a random order, just like a shuffle playlist.&lt;/p&gt;&#xA;&lt;p&gt;But, by default, the counters that manage limiting plays during playback are &lt;em&gt;global&lt;/em&gt;: if you go back to this playnode later, all of the songs will still be limited.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Playtree Playnode Types Explained</title>
+      <link>https://hwacha.github.io/posts/playtree-playnode-types-explained/</link>
+      <pubDate>Sat, 22 Mar 2025 14:52:03 -0700</pubDate>
+      <guid>https://hwacha.github.io/posts/playtree-playnode-types-explained/</guid>
+      <description>&lt;p&gt;Up to this point, playnodes have contained a single song. In practice, though, it would be tedious to have to make a playnode and playedges for every single song you want in a playtree. The playnodes in the Playtree app are containers for any number of songs. Because playnodes can handle collections of songs, it opens the possibility of adding whole playlists into a playnode.&lt;/p&gt;&#xA;&lt;p&gt;Playnodes come in two types: &lt;strong&gt;sequencers&lt;/strong&gt; and &lt;strong&gt;selectors&lt;/strong&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Playtree Shares and Priority Explained</title>
+      <link>https://hwacha.github.io/posts/playtree-shares-and-priority-explained/</link>
+      <pubDate>Fri, 21 Mar 2025 22:10:46 -0700</pubDate>
+      <guid>https://hwacha.github.io/posts/playtree-shares-and-priority-explained/</guid>
+      <description>&lt;p&gt;In this post I&amp;rsquo;ll explain &lt;em&gt;shares&lt;/em&gt; and &lt;em&gt;priority&lt;/em&gt;, parameters that apply to playedges. It presumes a familiarity with basic probability and the concept of mathematical limits.&lt;/p&gt;&#xA;&lt;p&gt;We have to refer to incoming edges a lot, so I&amp;rsquo;ll use &amp;ldquo;=&amp;gt; playnode&amp;rdquo; as a shorthand for talking about the playedge that leads into the named playnode.&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h3 id=&#34;shares&#34;&gt;Shares&lt;/h3&gt;&#xA;&lt;p&gt;&lt;img src=&#34;days-no-shares.png&#34; alt=&#34;alt&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;This playtree will play &amp;ldquo;One Week,&amp;rdquo; and then randomly select one of the day songs. &amp;ldquo;One Week&amp;rdquo; has seven outgoing playedges, and so, by default, each one has a &lt;code&gt;1/7&lt;/code&gt; chance of being selected.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Playtree Limits Explained</title>
+      <link>https://hwacha.github.io/posts/playtree-limits-explained/</link>
+      <pubDate>Fri, 21 Mar 2025 19:44:56 -0700</pubDate>
+      <guid>https://hwacha.github.io/posts/playtree-limits-explained/</guid>
+      <description>&lt;p&gt;In this post, I&amp;rsquo;ll explain how limits work in Playtree.&lt;/p&gt;&#xA;&lt;h3 id=&#34;limiting-playedges&#34;&gt;Limiting Playedges&lt;/h3&gt;&#xA;&lt;p&gt;&lt;img src=&#34;three-birds-no-limit.png&#34; alt=&#34;medium&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;This playtree will start at &amp;ldquo;Three Little Birds,&amp;rdquo; play one of &amp;ldquo;Blackbird,&amp;rdquo; &amp;ldquo;Free Bird,&amp;rdquo; or &amp;ldquo;Surfin&amp;rsquo; Bird,&amp;rdquo; play &amp;ldquo;No Birds,&amp;rdquo; and then repeat forever. In case you&amp;rsquo;re not familiar with these tunes, &amp;ldquo;Free Bird&amp;rdquo; is over 9 minutes long, and &amp;ldquo;Surfin&amp;rsquo; Bird&amp;rdquo; is best enjoyed in moderation. You might want to set a limit on how many times those songs can be selected.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Playtree Player Logic</title>
+      <link>https://hwacha.github.io/posts/playtree-player-logic/</link>
+      <pubDate>Wed, 19 Mar 2025 15:09:52 -0700</pubDate>
+      <guid>https://hwacha.github.io/posts/playtree-player-logic/</guid>
+      <description>&lt;p&gt;The rules that govern playback on a playtree are rather complicated. The user can play and pause audio, skip forward, go back to previously played songs, which must be memoized when playback randomly branches. Additionally, a user can switch between playheads, which loads/reloads a full playback context.&lt;/p&gt;&#xA;&lt;p&gt;I use a &lt;a href=&#34;https://react.dev/reference/react/useReducer&#34;&gt;reducer&lt;/a&gt; to handle playback logic. A reducer is a pure function which takes a state and an action and returns a state. Actions are dispatched as a response to UI events and external state changes, prompting an internal state update according to the reducer function. This provides a clean way to manage the logic of complex state updates.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

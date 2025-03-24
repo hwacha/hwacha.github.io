@@ -26,7 +26,7 @@
     
         
         
-            <link rel="stylesheet" href="/css/main.b8c8a70cd65c989b52395751fabbf4548aac6aa932cf58267b350b61df7a343e.css" integrity="sha256-uMinDNZcmJtSOVdR&#43;rv0VIqsaqkyz1gmezULYd96ND4=" crossorigin="anonymous">
+            <link rel="stylesheet" href="/css/main.df7157ac716271f14f3111c1a61a71acd8808aeae77be0362dcc0fbd28b3c689.css" integrity="sha256-33FXrHFicfFPMRHBphpxrNiAiurne&#43;A2LcwPvSizxok=" crossorigin="anonymous">
         
         
     
@@ -78,8 +78,22 @@
     <h1>Playtree Editor UI</h1>
     
     <article>
-      <p>I wanted to create an intuitive, fun UI for making and visualizing complex playtrees. Playtrees are graph structures, so I used <a href="https://reactflow.dev/">React Flow</a>, a library for rendering and interacting with graphs. The editor displays highly customized nodes and edges using React Flow. At the same time, I wanted to keep the playtree data structure, as maintained on the server, as the editor&rsquo;s source of truth. Keeping the React Flow UI synced with the playtree data required a nuanced understanding of React&rsquo;s reconciliation algorithm: if React cannot determine that a node remains the same from one render to another, for example, it will destroy the underlying HTML and recreate it for the next render. This isn&rsquo;t only a performance issue; in some cases, it will lead to critical UI bugs like losing focus on a text input while typing. I carefully synchronized the central playtree state with the React Flow UI state to ensure a clean data flow while avoiding any UI bugs.</p>
-<p>Although many of the rules governing valid playtrees are implicitly enforced by the editor UI, there are some features which must be checked before a playtree is saved. I perform client-side validation before a playtree is saved, which issues warnings to a user when their playtree doesn&rsquo;t have a playroot attached (meaning playback won&rsquo;t start anywhere if they try to play). This playtree is considered valid—it doesn&rsquo;t violate any playtree rules—but the editor still issues a warning on save, as the user most likely didn&rsquo;t intend to make a playtree that doesn&rsquo;t start playback anywhere. The editor also checks if a user&rsquo;s playscopes are valid. Playscopes can&rsquo;t partially overlap other playscopes, or be redundant. A playtree with invalid playscopes can&rsquo;t unambiguously apply scope rules, and so it is invalid as a playtree. When the user tries to save a invalid playtree, an error is reported in the editor and saving is prevented.</p>
+      <h3 id="synchronizing-playtree-data-with-react-flow-ui">Synchronizing Playtree data with React Flow UI</h3>
+<p>I wanted to create an intuitive, fun UI for making and visualizing complex playtrees. Playtrees are graph structures, so I used <a href="https://reactflow.dev/">React Flow</a>, a library for rendering and interacting with graphs. The editor displays highly customized nodes and edges using React Flow. I&rsquo;ll call these nodes and edges that appear in the editor&rsquo;s UI &ldquo;flow nodes&rdquo; and &ldquo;flow edges.&rdquo; These flow nodes and flow edges are distinct from playnodes and playedges, which are represented in data within a playtree data structure, which exists as a JSON file when stored on the server, and a Typescript object when used in the editor or player component on the Playtree client. Even so, the custom flow nodes and flow edges used in the editor UI do depend on the data with a playnode and playedge.</p>
+<p>I wanted to keep the playtree data structure, as maintained on the server, as the editor&rsquo;s source of truth. Keeping the React Flow UI synced with the playtree data required an awareness of React&rsquo;s <a href="https://18.react.dev/learn/preserving-and-resetting-state">reconciliation algorithm</a>. If React cannot determine that a node remains the same from one render to another, for example, it will destroy the underlying HTML and recreate it for the next render. This isn&rsquo;t only a performance issue; in some cases, it will lead to critical UI bugs like losing focus on an text input while typing. A user encountering this would have to manually refocus a text field after every character they type. This is an unacceptable usability issue. I carefully synchronized the central playtree state with the React Flow UI state to ensure a clean data flow while avoiding UI bugs.</p>
+<hr>
+<h3 id="client-side-validation">Client-side validation</h3>
+<h4 id="input-validation">Input validation</h4>
+<p>Many of the rules governing valid playtrees are implicitly enforced by the editor&rsquo;s UI. Using the UI will always lead to a syntactically well-formed playtree file, for example, and things like generating unique identifiers for playnodes and managing indices for songs are all handled automatically.</p>
+<p>In some cases, however, the UI still allows a user to make invalid playtrees. For example, the user can enter invalid input in one of the text fields. An error decoration is added to invalid input fields, and the parameter will be set to its default value on save if the user doesn&rsquo;t correct the input first.</p>
+<p><img src="invalid-input-field.png" alt="alt"></p>
+<h4 id="validation-on-save">Validation on save</h4>
+<p>Some features involve ensuring graph-wide invariants and are therefore checked before a playtree is saved. The editor will issue a warning if a user&rsquo;s playtree doesn&rsquo;t have a playroot. If no playroot is assigned to a playnode, playback can&rsquo;t start anywhere.</p>
+<p><img src="no-playroots-warning.png" alt="alt"></p>
+<p>This playtree is considered valid; it doesn&rsquo;t violate any playtree rules. Still, the user probably didn&rsquo;t intend to make a playtree that doesn&rsquo;t start playback anywhere, and so they are issued a warning.</p>
+<p>The editor also checks if a user&rsquo;s playscopes are valid. Playscopes can&rsquo;t partially overlap other playscopes, or be redundant. A playtree with invalid playscopes can&rsquo;t unambiguously apply scope rules, and so it is invalid as a playtree.</p>
+<p><img src="invalid-playscopes-error.png" alt="alt"></p>
+<p>When the user tries to save an invalid playtree, an error is reported in the editor. Notice that the save icon is still visible. Invalid playtrees are not saved to the server.</p>
 
     </article>
     <aside>

@@ -26,7 +26,7 @@
     
         
         
-            <link rel="stylesheet" href="/css/main.b8c8a70cd65c989b52395751fabbf4548aac6aa932cf58267b350b61df7a343e.css" integrity="sha256-uMinDNZcmJtSOVdR&#43;rv0VIqsaqkyz1gmezULYd96ND4=" crossorigin="anonymous">
+            <link rel="stylesheet" href="/css/main.df7157ac716271f14f3111c1a61a71acd8808aeae77be0362dcc0fbd28b3c689.css" integrity="sha256-33FXrHFicfFPMRHBphpxrNiAiurne&#43;A2LcwPvSizxok=" crossorigin="anonymous">
         
         
     
@@ -88,11 +88,11 @@
 <p>Let&rsquo;s update our shuffle so it can shuffle more than once:</p>
 <p><img src="90s-shuffle-with-reset.png" alt="medium"></p>
 <p>The blue box around &ldquo;90s Alphabet Shuffle&rdquo; is a playscope. The &ldquo;Reset&rdquo; playnode has no songs: it exists to allow playback to exit the blue scope, resetting the play counters on the shuffle songs. Letting this play through will shuffle the five songs, shuffle the five songs again in a different order, and so on, indefinitely.</p>
-<p>Playscopes can apply to multiple playnodes. Let&rsquo;s add another shuffle playnode:</p>
+<p>Playscopes can apply to multiple playnodes. Let&rsquo;s add another shuffle playnode—</p>
 <p><img src="70s-shuffle.png" alt="medium"></p>
-<p>and make a &ldquo;zipper shuffle&rdquo; out of these two playlists: randomly play one song from the 90s playlist, then randomly play one song from the 70s playlist, then choose a different song from the 90s playlist, then choose a different song from the 70s playlist, etc.</p>
+<p>—and make a &ldquo;zipper shuffle&rdquo; out of these two playlists: randomly play one song from the 90s playlist, then randomly play one song from the 70s playlist, then choose a different song from the 90s playlist, then choose a different song from the 70s playlist, etc.</p>
 <p><img src="zipper-shuffle.png" alt="small"></p>
-<p>Playback cycles between the two selectors five times, all the while staying in the blue playscope. Then, the playedge from &ldquo;70s&hellip;&rdquo; to &ldquo;90s&rdquo; is limited, and the playedge to &ldquo;Reset&rdquo; is followed. The &ldquo;Reset&rdquo; playnode is not in the blue playscope, and so all of the counters in the blue playscope are reset to <code>0</code>. This includes the playedge that was limited to <code>4</code>. Playback passes through the empty &ldquo;Reset&rdquo; playnode to &ldquo;90s&hellip;,&rdquo; which starts the zipper shuffle all over again.</p>
+<p>Playback cycles between the two selectors five times, all the while staying in the blue playscope. Then, the playedge from &ldquo;70s&hellip;&rdquo; to &ldquo;90s&hellip;&rdquo; is limited, and the playedge to &ldquo;Reset&rdquo; is followed. The &ldquo;Reset&rdquo; playnode is not in the blue playscope, and so all of the counters in the blue playscope are reset to <code>0</code>. This includes the playedge that was limited to <code>4</code>. Playback passes through the empty &ldquo;Reset&rdquo; playnode to &ldquo;90s&hellip;,&rdquo; which starts the zipper shuffle all over again.</p>
 <hr>
 <h3 id="nested-playscopes">Nested Playscopes</h3>
 <p>You can have any number of playscopes in a playtree. There a rules that restrict how playscopes can overlap one another, though.</p>
@@ -111,6 +111,13 @@
 
     </article>
     <aside>
+      
+        <div>Tags</div>
+        <ul>
+          
+            <li><a href="/tags/explainer/">Explainer</a></li>
+          
+        </ul>
       
     </aside>
   </section>

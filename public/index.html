@@ -27,7 +27,7 @@
     
         
         
-            <link rel="stylesheet" href="/css/main.b8c8a70cd65c989b52395751fabbf4548aac6aa932cf58267b350b61df7a343e.css" integrity="sha256-uMinDNZcmJtSOVdR&#43;rv0VIqsaqkyz1gmezULYd96ND4=" crossorigin="anonymous">
+            <link rel="stylesheet" href="/css/main.df7157ac716271f14f3111c1a61a71acd8808aeae77be0362dcc0fbd28b3c689.css" integrity="sha256-33FXrHFicfFPMRHBphpxrNiAiurne&#43;A2LcwPvSizxok=" crossorigin="anonymous">
         
         
     
@@ -79,122 +79,92 @@
     
     <h1 id="bill-marcy">Bill Marcy</h1>
 <h3 id="software-engineer">Software Engineer</h3>
+<p>I studied computer science at Brown University alongside a concentration in philosophy. After that, I worked at the CUNY Research Foundation for three years, at first as a front-end developer and later as a UX engineer. After parting ways with CUNY RF in 2024, I&rsquo;ve focused on learning more about web development from the ground up. Lately, I&rsquo;ve been putting those efforts into Playtree, a web app which lets a user make Spotify song collections where playback can loop and branch.</p>
+<p>All the while, I&rsquo;ve also worked on personal game projects like Entale, an open-world RPG with a procedural language system. I also attended the Recurse Center, a programming retreat, where I experimented with computer graphics, React development, and logic programming.</p>
 
   </div>
-  
-    <div class="home-links">
-        <div class="blurb-card">
-          <a href="/posts/playtree-playscopes-explained/" style="text-decoration:none; color: inherit;"><h1>Playtree Playscopes Explained</h1></a>
-          <div class="blurb-window"><h3 id="shuffle">Shuffle</h3>
-<p>You can make a shuffle playlist in Playtree with a selector:</p>
-<p><img src="90s-shuffle.png" alt="medium"></p>
-<p>Each song is limited to one play, and the node is set to repeat five times. This means the selector will play all five songs in a random order, just like a shuffle playlist.</p>
-<p>But, by default, the counters that manage limiting plays during playback are <em>global</em>: if you go back to this playnode later, all of the songs will still be limited.</p></div>
-          <a href="/posts/playtree-playscopes-explained/">[Read more]</a>
-        </div>
-      </a>
-    </div>
-  
-    <div class="home-links">
-        <div class="blurb-card">
-          <a href="/posts/playtree-playnode-types-explained/" style="text-decoration:none; color: inherit;"><h1>Playtree Playnode Types Explained</h1></a>
-          <div class="blurb-window"><p>Up to this point, playnodes have contained a single song. In practice, though, it would be tedious to have to make a playnode and playedges for every single song you want in a playtree. The playnodes in the Playtree app are containers for any number of songs. Because playnodes can handle collections of songs, it opens the possibility of adding whole playlists into a playnode.</p>
-<p>Playnodes come in two types: <strong>sequencers</strong> and <strong>selectors</strong>.</p></div>
-          <a href="/posts/playtree-playnode-types-explained/">[Read more]</a>
-        </div>
-      </a>
-    </div>
-  
-    <div class="home-links">
-        <div class="blurb-card">
-          <a href="/posts/playtree-shares-and-priority-explained/" style="text-decoration:none; color: inherit;"><h1>Playtree Shares and Priority Explained</h1></a>
-          <div class="blurb-window"><p>In this post I&rsquo;ll explain <em>shares</em> and <em>priority</em>, parameters that apply to playedges. It presumes a familiarity with basic probability and the concept of mathematical limits.</p>
-<p>We have to refer to incoming edges a lot, so I&rsquo;ll use &ldquo;=&gt; playnode&rdquo; as a shorthand for talking about the playedge that leads into the named playnode.</p>
-<hr>
-<h3 id="shares">Shares</h3>
-<p><img src="days-no-shares.png" alt="alt"></p>
-<p>This playtree will play &ldquo;One Week,&rdquo; and then randomly select one of the day songs. &ldquo;One Week&rdquo; has seven outgoing playedges, and so, by default, each one has a <code>1/7</code> chance of being selected.</p></div>
-          <a href="/posts/playtree-shares-and-priority-explained/">[Read more]</a>
-        </div>
-      </a>
-    </div>
-  
-    <div class="home-links">
-        <div class="blurb-card">
-          <a href="/posts/playtree-limits-explained/" style="text-decoration:none; color: inherit;"><h1>Playtree Limits Explained</h1></a>
-          <div class="blurb-window"><p>In this post, I&rsquo;ll explain how limits work in Playtree.</p>
-<h3 id="limiting-playedges">Limiting Playedges</h3>
-<p><img src="three-birds-no-limit.png" alt="medium"></p>
-<p>This playtree will start at &ldquo;Three Little Birds,&rdquo; play one of &ldquo;Blackbird,&rdquo; &ldquo;Free Bird,&rdquo; or &ldquo;Surfin&rsquo; Bird,&rdquo; play &ldquo;No Birds,&rdquo; and then repeat forever. In case you&rsquo;re not familiar with these tunes, &ldquo;Free Bird&rdquo; is over 9 minutes long, and &ldquo;Surfin&rsquo; Bird&rdquo; is best enjoyed in moderation. You might want to set a limit on how many times those songs can be selected.</p></div>
-          <a href="/posts/playtree-limits-explained/">[Read more]</a>
-        </div>
-      </a>
-    </div>
-  
-    <div class="home-links">
-        <div class="blurb-card">
-          <a href="/posts/playtree-structure-explained/" style="text-decoration:none; color: inherit;"><h1>Playtree Structure Explained</h1></a>
-          <div class="blurb-window"><p>In this article, I&rsquo;ll explain what a playtree structure is. A basic familiarity with sequences and cycles, trees, graphs, and linked lists is assumed.</p>
-<p>There&rsquo;s no doubt you&rsquo;re familiar with playlists. Let&rsquo;s take an example of one on Spotify:</p>
-<p><img src="small-talk-spotify-playlist.png" alt="small"></p>
-<p>If you play this playlist without shuffle or loop toggled on, it will start playing &ldquo;Hello.&rdquo; After &ldquo;Hello&rdquo; finishes, &ldquo;What&rsquo;s Up?&rdquo; will start playing. Then, &ldquo;I&rsquo;m Alright.&rdquo; This will carry on until &ldquo;See You Later, Alligator,&rdquo; the last song in the playlist, finishes. After that, playback stops. We can model the playlist&rsquo;s playback behavior with the following directed graph:</p></div>
-          <a href="/posts/playtree-structure-explained/">[Read more]</a>
-        </div>
-      </a>
-    </div>
-  
-    <div class="home-links">
-        <div class="blurb-card">
-          <a href="/posts/some-nifty-macos-terminal-commands/" style="text-decoration:none; color: inherit;"><h1>Some Nifty MacOS Terminal Commands</h1></a>
-          <div class="blurb-window"><p>In the course of making <a href="/posts/playtree-technical-overview">Playtree</a>, I came across some esoteric terminal commands for MacOS. To start with the least useful:</p>
-<pre tabindex="0"><code>afplay &lt;audio_file&gt;
-</code></pre><p>will play a specified audio file from the command line. I used this in an early CLI prototype for Playtree, but its utility is pretty limited. There&rsquo;s no way to control audio once playback starts. You can stop playback by sending an interrupt signal with <code>CTRL-C</code>, and you can &ldquo;mute&rdquo; audio by suspending the process with <code>CTRL-Z</code>. This doesn&rsquo;t pause playback, though. It&rsquo;s still playing through silently in the background.</p></div>
-          <a href="/posts/some-nifty-macos-terminal-commands/">[Read more]</a>
-        </div>
-      </a>
-    </div>
-  
-    <div class="home-links">
-        <div class="blurb-card">
-          <a href="/posts/playtree-spotify-integration/" style="text-decoration:none; color: inherit;"><h1>Playtree Spotify Integration</h1></a>
-          <div class="blurb-window"><p>Playtree uses the <a href="https://developer.spotify.com/documentation/web-api">Spotify API</a> to search for tracks on Spotify, and to play music within Playtree. I also use the <a href="https://developer.spotify.com/documentation/web-playback-sdk">Spotify Web Playback SDK</a>, which allows for Spotify playback to occur within the app itself, and for certain events pertaining to Spotify playback to be reported real-time to the application.</p>
-<p>Spotify API calls must be authenticated, and so I use the Authorization Code flow to obtain an access token from the server side. I need to use the access token on both the client side (because the Web Playback SDK can only be used client-side) and server side (because my server uses Spotify tokens as a proxy for the user&rsquo;s identity within the site). Access tokens are stored as a cookie.</p></div>
-          <a href="/posts/playtree-spotify-integration/">[Read more]</a>
-        </div>
-      </a>
-    </div>
-  
-    <div class="home-links">
-        <div class="blurb-card">
-          <a href="/posts/playtree-player-logic/" style="text-decoration:none; color: inherit;"><h1>Playtree Player Logic</h1></a>
-          <div class="blurb-window"><p>The rules that govern playback on a playtree are rather complicated. The user can play and pause audio, skip forward a song, go back to previously played songs, which must be memoized when playback is randomly selected. Additionally, a user can switch between playheads.</p>
-<p>I use a <a href="https://react.dev/reference/react/useReducer">reducer</a> to handle playback logic. The reducers handle all necessary logic in order to transition from one song to the next. When a song ends or if the user skips forward, a new song is selected either by moving through a playnode or by randomly selecting the next playnode according to the playedge rules. A history stack is maintained on each playhead, which holds a reference to previously visited playnodes and playedges, and a copy of old play counters, if they had changed when visiting that node or edge. Playscopes are preprocessed and placed within maps indexed by playnode so that they can reset play counters when needed.</p></div>
-          <a href="/posts/playtree-player-logic/">[Read more]</a>
-        </div>
-      </a>
-    </div>
-  
-    <div class="home-links">
-        <div class="blurb-card">
-          <a href="/posts/playtree-editor-ui/" style="text-decoration:none; color: inherit;"><h1>Playtree Editor UI</h1></a>
-          <div class="blurb-window"><p>I wanted to create an intuitive, fun UI for making and visualizing complex playtrees. Playtrees are graph structures, so I used <a href="https://reactflow.dev/">React Flow</a>, a library for rendering and interacting with graphs. The editor displays highly customized nodes and edges using React Flow. At the same time, I wanted to keep the playtree data structure, as maintained on the server, as the editor&rsquo;s source of truth. Keeping the React Flow UI synced with the playtree data required a nuanced understanding of React&rsquo;s reconciliation algorithm: if React cannot determine that a node remains the same from one render to another, for example, it will destroy the underlying HTML and recreate it for the next render. This isn&rsquo;t only a performance issue; in some cases, it will lead to critical UI bugs like losing focus on a text input while typing. I carefully synchronized the central playtree state with the React Flow UI state to ensure a clean data flow while avoiding any UI bugs.</p></div>
-          <a href="/posts/playtree-editor-ui/">[Read more]</a>
-        </div>
-      </a>
-    </div>
-  
-    <div class="home-links">
-        <div class="blurb-card">
-          <a href="/posts/playtree-technical-overview/" style="text-decoration:none; color: inherit;"><h1>Playtree Technical Overview</h1></a>
-          <div class="blurb-window"><p>Playtree is an application for making and listening to <em>playtrees</em>, which are like playlists, except that playback can branch, loop, and start at multiple entry points. You can try out playtree <a href="https://playtree.gdn">here</a>. In this post, I&rsquo;ll provide a broad overview of Playtree and its development.</p>
+  <div class="display:flex;">
+    
+    
+    
+    
+      <div class="home-links">
+          <div class="blurb-card">
+            <a href="/posts/playtree-technical-overview/" style="text-decoration:none; color: inherit;"><h1>Playtree Technical Overview</h1></a>
+            <div class="blurb-window"><p>Playtree is an application for making and listening to <em>playtrees</em>, which are like playlists, except that playback can branch, loop, and start at multiple entry points. You can try out playtree <a href="https://playtree.gdn">here</a>. In this post, I&rsquo;ll provide a broad overview of Playtree and its development.</p>
 <h2 id="at-a-glance">At a Glance</h2>
 <p><img src="example-playtree.png" alt="alt"></p>
 <p>Playtree is a web application for creating custom playtrees, which are directed graphs. Playnodes contain songs to be played, and playedges define a path playback can follow.</p></div>
-          <a href="/posts/playtree-technical-overview/">[Read more]</a>
-        </div>
-      </a>
-    </div>
+            <a href="/posts/playtree-technical-overview/">[Read more]</a>
+          </div>
+        </a>
+      </div>
+    
+      <div class="home-links">
+          <div class="blurb-card">
+            <a href="/posts/some-nifty-macos-terminal-commands/" style="text-decoration:none; color: inherit;"><h1>Some Nifty MacOS Terminal Commands</h1></a>
+            <div class="blurb-window"><p>In the course of making <a href="/posts/playtree-technical-overview">Playtree</a>, I came across some esoteric terminal commands for MacOS. To start with the least useful:</p>
+<pre tabindex="0"><code>afplay &lt;audio_file&gt;
+</code></pre><p>will play a specified audio file from the command line. I used this in an early CLI prototype for Playtree, but its utility is pretty limited. There&rsquo;s no way to control audio once playback starts. You can stop playback by sending an interrupt signal with <code>CTRL-C</code>, and you can &ldquo;mute&rdquo; audio by suspending the process with <code>CTRL-Z</code>. This doesn&rsquo;t pause playback, though. It&rsquo;s still playing through silently in the background.</p></div>
+            <a href="/posts/some-nifty-macos-terminal-commands/">[Read more]</a>
+          </div>
+        </a>
+      </div>
+    
+      <div class="home-links">
+          <div class="blurb-card">
+            <a href="/posts/playtree-spotify-integration.png/" style="text-decoration:none; color: inherit;"><h1>Playtree Spotify Integration</h1></a>
+            <div class="blurb-window"><p>Playtree uses the <a href="https://developer.spotify.com/documentation/web-api">Spotify API</a> to search for tracks on Spotify, and to play music within Playtree. It also makes use of the <a href="https://developer.spotify.com/documentation/web-playback-sdk">Spotify Web Playback SDK</a>, which allows for Spotify playback to occur within the app itself, and for certain events pertaining to Spotify playback to be reported real-time to the application.</p>
+<hr>
+<h3 id="authentication">Authentication</h3>
+<p>Spotify API calls must be authenticated, and so I use the Authorization Code flow to obtain an access token from the server side. I need to use the access token on both the client and the server. Web Playback SDK can only be used client-side, and my server uses Spotify tokens as a proxy for the user&rsquo;s identity within the site. Access tokens and refresh tokens are stored as cookies.</p></div>
+            <a href="/posts/playtree-spotify-integration.png/">[Read more]</a>
+          </div>
+        </a>
+      </div>
+    
+      <div class="home-links">
+          <div class="blurb-card">
+            <a href="/posts/playtree-player-logic/" style="text-decoration:none; color: inherit;"><h1>Playtree Player Logic</h1></a>
+            <div class="blurb-window"><p>The rules that govern playback on a playtree are rather complicated. The user can play and pause audio, skip forward, go back to previously played songs, which must be memoized when playback randomly branches. Additionally, a user can switch between playheads, which loads/reloads a full playback context.</p>
+<p>I use a <a href="https://react.dev/reference/react/useReducer">reducer</a> to handle playback logic. A reducer is a pure function which takes a state and an action and returns a state. Actions are dispatched as a response to UI events and external state changes, prompting an internal state update according to the reducer function. This provides a clean way to manage the logic of complex state updates.</p></div>
+            <a href="/posts/playtree-player-logic/">[Read more]</a>
+          </div>
+        </a>
+      </div>
+    
+      <div class="home-links">
+          <div class="blurb-card">
+            <a href="/posts/playtree-editor-ui/" style="text-decoration:none; color: inherit;"><h1>Playtree Editor UI</h1></a>
+            <div class="blurb-window"><h3 id="synchronizing-playtree-data-with-react-flow-ui">Synchronizing Playtree data with React Flow UI</h3>
+<p>I wanted to create an intuitive, fun UI for making and visualizing complex playtrees. Playtrees are graph structures, so I used <a href="https://reactflow.dev/">React Flow</a>, a library for rendering and interacting with graphs. The editor displays highly customized nodes and edges using React Flow. I&rsquo;ll call these nodes and edges that appear in the editor&rsquo;s UI &ldquo;flow nodes&rdquo; and &ldquo;flow edges.&rdquo; These flow nodes and flow edges are distinct from playnodes and playedges, which are represented in data within a playtree data structure, which exists as a JSON file when stored on the server, and a Typescript object when used in the editor or player component on the Playtree client. Even so, the custom flow nodes and flow edges used in the editor UI do depend on the data with a playnode and playedge.</p></div>
+            <a href="/posts/playtree-editor-ui/">[Read more]</a>
+          </div>
+        </a>
+      </div>
+    
+  </div>
   
+    <ul class="pagination pagination-default">
+      <li class="page-item disabled">
+        <a aria-disabled="true" aria-label="First" class="page-link" role="button" tabindex="-1"><span aria-hidden="true">&laquo;&laquo;</span></a>
+      </li>
+      <li class="page-item disabled">
+        <a aria-disabled="true" aria-label="Previous" class="page-link" role="button" tabindex="-1"><span aria-hidden="true">&laquo;</span></a>
+      </li>
+      <li class="page-item active">
+        <a aria-current="page" aria-label="Page 1" class="page-link" role="button">1</a>
+      </li>
+      <li class="page-item">
+        <a href="/page/2/" aria-label="Page 2" class="page-link" role="button">2</a>
+      </li>
+      <li class="page-item">
+        <a href="/page/2/" aria-label="Next" class="page-link" role="button"><span aria-hidden="true">&raquo;</span></a>
+      </li>
+      <li class="page-item">
+        <a href="/page/2/" aria-label="Last" class="page-link" role="button"><span aria-hidden="true">&raquo;&raquo;</span></a>
+      </li>
+    </ul>
 
     
     
