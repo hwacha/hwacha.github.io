@@ -7,7 +7,7 @@ title = 'Home'
 
 ### Software Engineer
 
-#### [Resume](/bill-marcy-resume.pdf)
+#### [Resume](/bill-marcy-resume.pdf) | [GitHub](https://github.com/wgmarcy)
 
 I studied computer science at Brown University alongside a concentration in philosophy. After that, I worked at the CUNY Research Foundation for three years, at first as a front-end developer and later as a UX engineer. After CUNY, I've focused on learning more about web development from the ground up. Lately, I've been putting those efforts into Playtree, a web app which lets a user make Spotify song collections where playback can loop and branch.
 
