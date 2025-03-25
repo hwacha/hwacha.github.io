@@ -82,11 +82,11 @@
 <p>We have to refer to incoming edges a lot, so I&rsquo;ll use &ldquo;=&gt; playnode&rdquo; as a shorthand for talking about the playedge that leads into the named playnode.</p>
 <hr>
 <h3 id="shares">Shares</h3>
-<p><img src="days-no-shares.png" alt="alt"></p>
+<p><img src="/posts/playtree-shares-and-priority-explained/days-no-shares.png" alt="alt"></p>
 <p>This playtree will play &ldquo;One Week,&rdquo; and then randomly select one of the day songs. &ldquo;One Week&rdquo; has seven outgoing playedges, and so, by default, each one has a <code>1/7</code> chance of being selected.</p>
 <p>You like all these songs, but you&rsquo;re a big fan of The Cure, and so you want &ldquo;Friday I&rsquo;m In Love&rdquo; to be selected more often than one in seven. To skew the odds, you could add duplicate playnodes for &ldquo;Friday I&rsquo;m In Love.&rdquo; If you added five more copies of that playnode, the chance of its being selected would go up to <code>6/12 = 1/2</code>. But you&rsquo;d have to wire up the edges for each of them, and you couldn&rsquo;t set a consistent limit for them if you wanted to.</p>
 <p>Conveniently, you can set the playedge&rsquo;s <em>shares</em> parameter instead. The name &ldquo;shares&rdquo; is meant to evoke shares in a raffle; giving a playedge more shares increases its odds of winning the &ldquo;playback lottery.&rdquo; Take &ldquo;=&gt; Friday I&rsquo;m In Love&rdquo; and set its shares to <code>6</code>. The chances of selecting that playedge rise up to <code>6/12 = 1/2</code>, and the other six edges each have a <code>1/12</code> chance of being selected.</p>
-<p><img src="days-with-shares.png" alt="alt"></p>
+<p><img src="/posts/playtree-shares-and-priority-explained/days-with-shares.png" alt="alt"></p>
 <p>The formula for a playedge \(e_i\)&rsquo;s probability of being selected from a set of outgoing edges \(OE\) is</p>
 \[
 \begin{aligned}
@@ -96,9 +96,9 @@
 <p>You can set a playedge&rsquo;s shares to <code>0</code>. This will mean that a playedge is never selected. When a playedge reaches its play limit, you can think of its shares as being set to <code>0</code>.</p>
 <hr>
 <h3 id="priority">Priority</h3>
-<p><img src="numbers-no-priority.png" alt="small"></p>
+<p><img src="/posts/playtree-shares-and-priority-explained/numbers-no-priority.png" alt="small"></p>
 <p>Let&rsquo;s say you really wanted &ldquo;One Time&rdquo; to be selected first, once, and then &ldquo;2 Times&rdquo; to be selected next. How could you achieve this? Well, you could limit &ldquo;=&gt; One Time&rdquo; to <code>1</code>, and set its shares to a really high value:</p>
-<p><img src="numbers-with-shares.png" alt="small"></p>
+<p><img src="/posts/playtree-shares-and-priority-explained/numbers-with-shares.png" alt="small"></p>
 <p>This playtree is <em>very likely</em> to do what you want; the probability is <code>9999/10,000</code>. But once every ten thousand runs or so, it will choose &ldquo;=&gt; 2 Times&rdquo; first instead. You could keep adding shares, and it&rsquo;ll become more and more of a sure thing to work as expected.</p>
 <p>But it won&rsquo;t ever be <em>guaranteed</em>. The likelihood of selecting the right playedge approaches <code>1</code> but never quite reaches it. If, instead, we could take the <em>limit</em> of this process, we could get our guarantee:</p>
 \[
@@ -109,7 +109,7 @@
 \]<p>It&rsquo;s this second limit that undergirds <em>priority</em>, another playedge parameter. Only the playedges with the lowest priority are eligible for selection. Playedges with higher priority have to wait until the lower priority playedges are limited.</p>
 <p>(Note that &ldquo;lower priority&rdquo; here means the priority <em>value</em> is lower, not that it has lower priority in the colloquial sense of the term. The opposite is true: a playedge with a lower priority value is given <em>higher</em> priority in selection.)</p>
 <p>We can add priority values to the playedges in our playtree:</p>
-<p><img src="numbers-with-priority.png" alt="small"></p>
+<p><img src="/posts/playtree-shares-and-priority-explained/numbers-with-priority.png" alt="small"></p>
 <p>Now &ldquo;=&gt; One Time&rdquo; has the lowest priority, so it is always selected first. Since its limit is set to <code>1</code>, the next time around, it&rsquo;s taken out of contention. Because it&rsquo;s now the lowest priority playedge in contention, &ldquo;=&gt; 2 Times&rdquo; is now eligible for selection. It&rsquo;s chosen, and plays this second time around, just like we wanted.</p>
 <p>If there are multiple playedges tied for the lowest priority value, they&rsquo;re randomly selected according to the shares, as usual. All of them must be limited before any higher priority playedges are selected.</p>
 <p>The playedge selection formula can be revised to accommodate priority as follows: the probability that a playedge \(e_i\) is selected from a set of outgoing playedges \(OE\) is</p>
@@ -123,7 +123,7 @@ $$\lim_{x \to 0} \frac{x^0 * 1}{x^0 * 1 + x^1 * 1} = \lim_{x \to 0} \frac{1}{1 +
 $$\lim_{x \to 0} \frac{x^1 * 1}{x^0 * 1 + x^1 * 1} = \lim_{x \to 0} \frac{x}{1 + x} = 0.$$<p>So, &ldquo;=&gt; One Time&rdquo; is selected. That playedge reaches its play limit. Recall that you can treat a limited playedge as having zero shares. Now, let&rsquo;s use the formula for the next time around. The probability of selecting the limited &ldquo;=&gt; One Time&rdquo; is</p>
 $$\lim_{x \to 0} \frac{x^0 * 0}{x^0 * 0 + x^1 * 1} = \lim_{x \to 0} \frac{0}{x} = 0,$$<p>and the probability of selecting &ldquo;=&gt; 2 Times&rdquo; is</p>
 $$\lim_{x \to 0} \frac{x^1 * 1}{x^0 * 0 + x^1 * 1} = \lim_{x \to 0} \frac{x}{x} = 1.$$<p>With priority, we can impose a sequential order on selection. Let&rsquo;s go back to our &ldquo;days of the week&rdquo; playtree and add priority values:</p>
-<p><img src="days-with-priority.png" alt="alt"></p>
+<p><img src="/posts/playtree-shares-and-priority-explained/days-with-priority.png" alt="alt"></p>
 <p>Now, &ldquo;=&gt; Sunday Morning&rdquo; is selected first, then &ldquo;=&gt; Manic Monday,&rdquo; and so on, until, finally, &ldquo;=&gt; Saturday in the Park&rdquo; is selected.</p>
 <hr>
 <p>The next topic is <a href="/posts/playtree-playnode-types-explained/">playnode types</a>.</p>

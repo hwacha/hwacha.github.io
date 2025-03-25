@@ -79,7 +79,7 @@
     
     <h1 id="bill-marcy">Bill Marcy</h1>
 <h3 id="software-engineer">Software Engineer</h3>
-<h4 id="resume"><a href="bill-marcy-resume.pdf">Resume</a></h4>
+<h4 id="resume--github"><a href="/bill-marcy-resume.pdf">Resume</a> | <a href="https://github.com/wgmarcy">GitHub</a></h4>
 <p>I studied computer science at Brown University alongside a concentration in philosophy. After that, I worked at the CUNY Research Foundation for three years, at first as a front-end developer and later as a UX engineer. After CUNY, I&rsquo;ve focused on learning more about web development from the ground up. Lately, I&rsquo;ve been putting those efforts into Playtree, a web app which lets a user make Spotify song collections where playback can loop and branch.</p>
 <p>All the while, I&rsquo;ve also worked on personal game projects like Entale, an open-world RPG with a procedural language system. I also attended the Recurse Center, a programming retreat, where I experimented with computer graphics, React development, and logic programming.</p>
 
@@ -94,7 +94,7 @@
             <a href="/posts/playtree-structure-explained/" style="text-decoration:none; color: inherit;"><h1>Playtree Structure Explained</h1></a>
             <div class="blurb-window"><p>In this article, I&rsquo;ll explain what a playtree structure is. A basic familiarity with sequences and cycles, trees, graphs, and linked lists is assumed.</p>
 <p>There&rsquo;s no doubt you&rsquo;re familiar with playlists. Let&rsquo;s take an example of one on Spotify:</p>
-<p><img src="small-talk-spotify-playlist.png" alt="small"></p>
+<p><img src="/posts/playtree-structure-explained/small-talk-spotify-playlist.png" alt="small"></p>
 <p>If you play this playlist without shuffle or loop toggled on, it will start playing &ldquo;Hello.&rdquo; After &ldquo;Hello&rdquo; finishes, &ldquo;What&rsquo;s Up?&rdquo; will start playing. Then, &ldquo;I&rsquo;m Alright.&rdquo; This will carry on until &ldquo;See You Later, Alligator,&rdquo; the last song in the playlist, finishes. After that, playback stops. We can model the playlist&rsquo;s playback behavior with the following directed graph:</p></div>
             <a href="/posts/playtree-structure-explained/">[Read more]</a>
           </div>
@@ -108,7 +108,7 @@
 <p>We have to refer to incoming edges a lot, so I&rsquo;ll use &ldquo;=&gt; playnode&rdquo; as a shorthand for talking about the playedge that leads into the named playnode.</p>
 <hr>
 <h3 id="shares">Shares</h3>
-<p><img src="days-no-shares.png" alt="alt"></p>
+<p><img src="/posts/playtree-shares-and-priority-explained/days-no-shares.png" alt="alt"></p>
 <p>This playtree will play &ldquo;One Week,&rdquo; and then randomly select one of the day songs. &ldquo;One Week&rdquo; has seven outgoing playedges, and so, by default, each one has a <code>1/7</code> chance of being selected.</p></div>
             <a href="/posts/playtree-shares-and-priority-explained/">[Read more]</a>
           </div>
@@ -120,7 +120,7 @@
             <a href="/posts/playtree-limits-explained/" style="text-decoration:none; color: inherit;"><h1>Playtree Limits Explained</h1></a>
             <div class="blurb-window"><p>In this post, I&rsquo;ll explain how limits work in Playtree.</p>
 <h3 id="limiting-playedges">Limiting Playedges</h3>
-<p><img src="three-birds-no-limit.png" alt="medium"></p>
+<p><img src="/posts/playtree-limits-explained/three-birds-no-limit.png" alt="medium"></p>
 <p>This playtree will start at &ldquo;Three Little Birds,&rdquo; play one of &ldquo;Blackbird,&rdquo; &ldquo;Free Bird,&rdquo; or &ldquo;Surfin&rsquo; Bird,&rdquo; play &ldquo;No Birds,&rdquo; and then repeat forever. In case you&rsquo;re not familiar with these tunes, &ldquo;Free Bird&rdquo; is over 9 minutes long, and &ldquo;Surfin&rsquo; Bird&rdquo; is best enjoyed in moderation. You might want to set a limit on how many times those songs can be selected.</p></div>
             <a href="/posts/playtree-limits-explained/">[Read more]</a>
           </div>
@@ -142,7 +142,7 @@
             <a href="/posts/playtree-playscopes-explained/" style="text-decoration:none; color: inherit;"><h1>Playtree Playscopes Explained</h1></a>
             <div class="blurb-window"><h3 id="shuffle">Shuffle</h3>
 <p>You can make a shuffle playlist in Playtree with a selector:</p>
-<p><img src="90s-shuffle.png" alt="medium"></p>
+<p><img src="/posts/playtree-playscopes-explained/90s-shuffle.png" alt="medium"></p>
 <p>Each song is limited to one play, and the node is set to repeat five times. This means the selector will play all five songs in a random order, just like a shuffle playlist.</p>
 <p>But, by default, the counters that manage limiting plays during playback are <em>global</em>: if you go back to this playnode later, all of the songs will still be limited.</p></div>
             <a href="/posts/playtree-playscopes-explained/">[Read more]</a>

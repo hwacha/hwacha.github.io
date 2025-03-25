@@ -86,13 +86,13 @@
 <h4 id="input-validation">Input validation</h4>
 <p>Many of the rules governing valid playtrees are implicitly enforced by the editor&rsquo;s UI. Using the UI will always lead to a syntactically well-formed playtree file, for example, and things like generating unique identifiers for playnodes and managing indices for songs are all handled automatically.</p>
 <p>In some cases, however, the UI still allows a user to make invalid playtrees. For example, the user can enter invalid input in one of the text fields. An error decoration is added to invalid input fields, and the parameter will be set to its default value on save if the user doesn&rsquo;t correct the input first.</p>
-<p><img src="invalid-input-field.png" alt="alt"></p>
+<p><img src="/posts/playtree-editor-ui/invalid-input-field.png" alt="alt"></p>
 <h4 id="validation-on-save">Validation on save</h4>
 <p>Some features involve ensuring graph-wide invariants and are therefore checked before a playtree is saved. The editor will issue a warning if a user&rsquo;s playtree doesn&rsquo;t have a playroot. If no playroot is assigned to a playnode, playback can&rsquo;t start anywhere.</p>
-<p><img src="no-playroots-warning.png" alt="alt"></p>
+<p><img src="/posts/playtree-editor-ui/no-playroots-warning.png" alt="alt"></p>
 <p>This playtree is considered valid; it doesn&rsquo;t violate any playtree rules. Still, the user probably didn&rsquo;t intend to make a playtree that doesn&rsquo;t start playback anywhere, and so they are issued a warning.</p>
 <p>The editor also checks if a user&rsquo;s playscopes are valid. Playscopes can&rsquo;t partially overlap other playscopes, or be redundant. A playtree with invalid playscopes can&rsquo;t unambiguously apply scope rules, and so it is invalid as a playtree.</p>
-<p><img src="invalid-playscopes-error.png" alt="alt"></p>
+<p><img src="/posts/playtree-editor-ui/invalid-playscopes-error.png" alt="alt"></p>
 <p>When the user tries to save an invalid playtree, an error is reported in the editor. Notice that the save icon is still visible. Invalid playtrees are not saved to the server.</p>
 
     </article>
