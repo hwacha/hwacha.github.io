@@ -9,7 +9,7 @@ menus = 'main'
     rank = 0
 +++
 
-Playtree is an application for making and listening to *playtrees*, which are like playlists, except that playback can branch, loop, and start at multiple entry points. You can try out playtree [here](https://playtree.gdn). In this post, I'll provide a broad overview of Playtree and its development.
+Playtree is an application for making and listening to *playtrees*, which are like playlists, except that playback can branch, loop, and start at multiple entry points. You can try out playtree [here](https://playtree.gdn). In this post, I'll provide a broad overview of the Playtree application and its development. The source code is available on [GitHub](https://github.com/wgmarcy/playtree).
 
 Check out the [playtree explainers](/posts/playtree-structure-explained/) for a more in-depth explanation of playtrees.
 
